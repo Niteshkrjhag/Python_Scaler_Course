@@ -1,0 +1,68 @@
+ # Recursion in Python with Data Structures
+
+ # - 1. Inserting a Node at the End and Traversing a Linked List Using Recursion
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
+def newNode(data):
+    new_node = Node(data)
+    new_node.data = data
+    new_node.next = None
+    return new_node
+
+
+def insertEnd(head, data):
+    if (head == None):
+        return newNode(data)
+    else:
+        head.next = insertEnd(head.next, data)
+    return head
+
+
+def traverse(head):
+    if (head == None):
+        return
+    print(head.data, end=" ")
+    traverse(head.next)
+
+
+
+
+
+head = None                   #head = Node(4)
+head = insertEnd(head, 6)     #head.next = Node(6)
+head = insertEnd(head, 8)     #head.next.next = Node(8)
+head = insertEnd(head, 10)
+head = insertEnd(head, 12)
+head = insertEnd(head, 14)
+traverse(head)
+
+? Which is the most appropriate definition for recursion?
+
+# i)A function that calls itself
+# ii)A function execution instance that calls another execution instance of the same function
+
+- ii) A function execution instance that calls another execution instance of the same function.
+
+Explanation:
+This definition is more precise because recursion isn't just a function calling itself; it involves creating new instances of the function with separate execution states until a base condition is met.
+
+Example:
+Consider a simple recursive function to calculate the factorial of a number n:
+
+python
+Copy code
+def factorial(n):
+    if n <= 1:          # Base case
+        return 1
+    else:
+        return n * factorial(n - 1)  # Recursive call
+When factorial(3) is called, it triggers new instances of factorial(2), factorial(1), and so on, until the base case n <= 1 is reached. Each instance waits for the result of the next to complete its own computation.
+
+
+- 2. Inorder Traversal of Binary Tree
+

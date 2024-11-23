@@ -1,0 +1,469 @@
+Regular expression is a sequence of characters that forms a pattern which is mainly used to find or replace patterns in a string
+
+- RegEx Module
+
+In python we have a built-in package called re to work with regular expressions.
+
+- Python RegEx Expressions Functions
+
+Here is the plain list version:
+
+1. **'findall(pattern, string)'**: This matches all the occurrences of the pattern present in the string.
+
+2. **'search(pattern, string)'**: This matches the pattern which is present at any position in the string. This will match the first occurrence of the pattern.
+
+3. **'split(pattern, string)'**: This splits the string on the given pattern.
+
+4. **'sub(pattern, rep_substring, string)'**: This replaces one or more matching pattern in the string with the given substring.
+
+- Meta Characters
+
+These are the characters which have special meaning.
+
+Here is the plain list version:
+
+1. **'[ ] (Square brackets)'**: Matches any single character in this bracket with the given string.  
+2. **'.' (Period)**: Matches all characters except the newline. If used as a pattern in the 'findall()' function, it matches all characters in the string except newline characters.  
+3. **'^ (Caret)'**: Matches the given pattern at the start of the string. Used to check if the string starts with a particular pattern.  
+4. **'$ (Dollar)'**: Matches the given pattern at the end of the string. Used to check if the string ends with a particular pattern.  
+5. **'* (Star)'**: Matches 0 or more occurrences of the pattern to its left.  
+6. **'+ (Plus)'**: Matches 1 or more occurrences of the pattern to its left.  
+7. **'? (Question mark)'**: Matches 0 or 1 occurrence of the pattern to its left.  
+8. **'{ } (Braces)'**: Matches the specified number of occurrences of the pattern present in the braces.  
+9. **'| (Alternation)'**: Works like an 'or' condition. Allows two or more patterns; matches if the string contains at least one of the patterns.  
+10. **'( ) (Group)'**: Groups various regular expressions together to find a match in the string.  
+11. **'\ (Backslash)'**: Matches special sequences or acts as an escape character.
+
+
+- Special Sequences in Python RegEx
+
+Here is the plain list version:
+
+1. **'\A'**: Matches if the characters to the right of this are at the beginning of the string.  
+2. **'\b'**: Matches if the characters to the right are at the beginning of a word or if the characters to the left are at the end of a word in the given string.  
+3. **'\B'**: Matches if the characters to the right or left of '\B' are not at the beginning or end of a word in the given string.  
+4. **'\d'**: Matches if the string contains a digit.  
+5. **'\D'**: Matches if the string contains only non-digit characters.  
+6. **'\s'**: Matches if the string contains a white space character.  
+7. **'\S'**: Matches if the string contains only characters other than a white space character.  
+8. **'\w'**: Matches if the string contains any character in 'a-z', 'A-Z', '0-9', and underscore ('_').  
+9. **'\W'**: Matches if the string contains characters other than 'a-z', 'A-Z', '0-9', and underscore ('_').  
+10. **'\Z'**: Matches if the characters to the left of '\Z' are present at the end of the string.
+
+Here’s a way to remember the regular expression sequences with a mnemonic or simplified logic for each one:
+
+1. **'\A'** - **"Always at the start"**  
+   - Think of it as **"A" for "Always"**; it ensures the match is at the very start of the string.
+
+2. **'\b'** - **"Boundary of a word"**  
+   - The **"b"** in '\b' stands for **"boundary"**. It matches the beginning or end of a word.
+
+3. **'\B'** - **"Not a Boundary"**  
+   - The **"B"** in '\B' is the opposite of '\b'. It matches a position where there **is no word boundary**.
+
+4. **'\d'** - **"Digit"**  
+   - The **"d"** stands for **"digit"**, which matches any numeric character (0-9).
+
+5. **'\D'** - **"Non-Digit"**  
+   - The **"D"** is the opposite of '\d', meaning it matches anything **except digits**.
+
+6. **'\s'** - **"Space"**  
+   - The **"s"** in '\s' stands for **"space"**. It matches any whitespace character (like spaces, tabs, etc.).
+
+7. **'\S'** - **"Non-Space"**  
+   - The **"S"** is the opposite of '\s', meaning it matches anything **except whitespace**.
+
+8. **'\w'** - **"Word Character"**  
+   - The **"w"** stands for **"word"**, which includes letters (a-z, A-Z), digits (0-9), and underscores ('_').
+
+9. **'\W'** - **"Non-Word Character"**  
+   - The **"W"** is the opposite of '\w', matching anything that is **not a letter, digit, or underscore**.
+
+10. **'\Z'** - **"End of the String"**  
+   - The **"Z"** stands for **"end"** of the string. It ensures the match occurs at the very end.
+
+---
+
+### Memory Tips:
+- **Start, Boundary, Digit, Space**: You can think of the first four ('\A', '\b', '\d', '\s') as the **"Basic Building Blocks"** of matching (position, word, digits, and spaces).
+- **Opposites**: Remember that '\D', '\S', and '\W' are just the opposite of their counterparts ('\d', '\s', and '\w').
+- **End and Boundary**: '\Z' matches at the **"end"** like a **"Z"** at the end of the alphabet, and '\b' is a **"boundary"** (beginning or end of a word).
+
+import re
+text = '''Alan Turing was born on 23 June 1912 in London.'''
+# Example for \A
+res = re.findall('\AAlan',text)
+print("Result for \A = ", res)
+print("-"*79)
+# Example for \b
+res = re.findall(r'\bLon',text)
+print("Result for \\b = ", res)
+print("-"*79)
+# Example for \b
+res = re.findall(r'ring\b',text)
+print("Result for \\b = ", res)
+print("-"*79)
+# Example for \B
+res = re.findall('\Bon',text)
+print("Result for \B = ", res)
+print("-"*79)
+# Example for \d
+res = re.findall('\d',text)
+print("Result for \d = ", res)
+print("-"*79)
+# Example for \D
+res = re.findall('\D',text)
+print("Result for \D = ", res)
+print("-"*79)
+# Example for \s
+res = re.findall('\s',text)
+print("Result for \s = ", res)
+print("-"*79)
+# Example for \S
+res = re.findall('\S',text)
+print("Result for \S = ", res)
+print("-"*79)
+# Example for \w
+res = re.findall('\w',text)
+print("Result for \w = ", res)
+print("-"*79)
+# Example for \W
+res = re.findall('\W',text)
+print("Result for \W = ", res)
+print("-"*79)
+# Example for \Z
+res = re.findall('London.\Z',text)
+print("Result for \Z = ", res)
+
+Output:
+Result for \A =  ['Alan']
+-------------------------------------------------------------------------------
+Result for \b =  ['Lon']
+-------------------------------------------------------------------------------
+Result for \b =  ['ring']
+-------------------------------------------------------------------------------
+Result for \B =  ['on', 'on']
+-------------------------------------------------------------------------------
+Result for \d =  ['2', '3', '1', '9', '1', '2']
+-------------------------------------------------------------------------------
+Result for \D =  ['A', 'l', 'a', 'n', ' ', 'T', 'u', 'r', 'i', 'n', 'g', ' ', 'w', 'a', 's', ' ', 'b', 'o', 'r', 'n', ' ', 'o', 'n', ' ', ' ', 'J', 'u', 'n', 'e', ' ', ' ', 'i', 'n', ' ', 'L', 'o', 'n', 'd', 'o', 'n', '.']
+-------------------------------------------------------------------------------
+Result for \s =  [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+-------------------------------------------------------------------------------
+Result for \S =  ['A', 'l', 'a', 'n', 'T', 'u', 'r', 'i', 'n', 'g', 'w', 'a', 's', 'b', 'o', 'r', 'n', 'o', 'n', '2', '3', 'J', 'u', 'n', 'e', '1', '9', '1', '2', 'i', 'n', 'L', 'o', 'n', 'd', 'o', 'n', '.']
+-------------------------------------------------------------------------------
+Result for \w =  ['A', 'l', 'a', 'n', 'T', 'u', 'r', 'i', 'n', 'g', 'w', 'a', 's', 'b', 'o', 'r', 'n', 'o', 'n', '2', '3', 'J', 'u', 'n', 'e', '1', '9', '1', '2', 'i', 'n', 'L', 'o', 'n', 'd', 'o', 'n']
+-------------------------------------------------------------------------------
+Result for \W =  [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '.']
+-------------------------------------------------------------------------------
+Result for \Z =  ['London.']
+
+
+? Sets
+
+A set is a set of characters inside the square bracket which is treated as a pattern.
+
+Here is the list of sets and their descriptions in plain text:
+
+1. **`[abcd]`** - Gives a match if the string contains any one of the characters `a`, `b`, `c`, or `d`.
+
+2. **`[a-z]`** - Gives a match if the string contains any character from `a` to `z` (lowercase letters).
+
+3. **`[A-Z]`** - Gives a match if the string contains any character from `A` to `Z` (uppercase letters).
+
+4. **`[0-9]`** - Gives a match if the string contains any digit from `0` to `9`.
+
+5. **`[a-zA-Z0-9]`** - Gives a match if the string contains any character that is a lowercase letter (`a-z`), an uppercase letter (`A-Z`), or a digit (`0-9`).
+
+6. **`[^a-zA-Z]`** - Gives a match if the string does **not** contain any alphabetic character (no `a-z` or `A-Z`).
+
+7. **`[%&$#@*]`** - Gives a match if the string contains any of the characters `%`, `&`, `$`, `#`, `@`, or `*`. When these characters are inside square brackets, they are treated as normal characters.
+
+---
+
+### Memory Tips:
+- **Character Ranges**: For `a-z`, `A-Z`, and `0-9`, think of the **"alphabetical and numerical range"**.
+- **Any Specific Set**: `[abcd]` and `[a-zA-Z0-9]` are just custom sets where you define what you want to match.
+- **Negation with `^`**: The `[^...]` syntax is used to match anything **except** the characters you specify.
+
+! findall(pattern, string)
+
+This function is the same as search but it matches all the occurrences of the pattern in the given string and returns a list. The list contains the number of times it is present in the string.
+
+
+import re
+text = '''Alan Turing was a pioneer of theoretical computer science and artificial intelligence. He was born on 23 June 1912 in Maida Vale, London'''
+res = re.findall('Turing',text)
+print("Result = {}".format(res))
+
+Output:
+Result = ['Turing']
+
+! search(pattern, string)
+
+This is the same as match function but this function can search patterns irrespective of the position at which the pattern is present. The pattern can be present anywhere in the string. This function matches the first occurrence of the pattern.
+
+import re
+text = '''Alan Turing was a pioneer of theoretical computer science and artificial intelligence. He was born on 23 June 1912 in Maida Vale, London'''
+
+res = re.search('Turing',text)
+print("Result = {} and start,end position = {}".format(res,res.span()))
+
+Output:
+Result = <re.Match object; span=(5, 11), match='Turing'> and start,end position = (5, 11)
+
+
+! split(pattern, string)
+
+This function splits a string on the given pattern. This returns the result as a list after splitting. 
+
+import re
+text = '''Alan Turing was a pioneer of theoretical computer science and artificial intelligence. He was born on 23 June 1912 in Maida Vale, London'''
+
+res = re.split("a", text)
+print("Result = {}".format(res))
+
+Output:
+Result = ['Al', 'n Turing w', 's ', ' pioneer of theoretic', 'l computer science ', 'nd ', 'rtifici', 'l intelligence. He w', 's born on 23 June 1912 in M', 'id', ' V', 'le, London']
+
+
+! sub(pattern, repl, string)
+
+This function replaces a pattern with the given substring in a given string. 
+import re
+text = '''Alan Turing was a pioneer of theoretical computer science and artificial intelligence. He was born on 23 June 1912 in Maida Vale, London'''
+
+res = re.sub('theoretical','practical',text)
+print("Result = {}".format(res))
+  
+Output:
+Result = Alan Turing was a pioneer of practical computer science and artificial intelligence. He was born on 23 June 1912 in Maida Vale, London
+
+! Match Object
+
+import re
+text = '''Alan Turing was a pioneer of theoretical computer science and artificial intelligence. He was born on 23 June 1912 in Maida Vale, London'''
+# Searches the pattern in the string.
+res = re.search('computer',text)
+print("Match object = {}".format(res))
+print("--"*30)
+print("group method output = ",res.group())
+print("--"*30)
+print("start method output = ",res.start()) 
+print("--"*30)
+print("end method output = ",res.end())
+print("--"*30)
+print("span method output = ",res.span()) 
+print("--"*30)
+print("re attribute output = ",res.re)
+print("--"*30)
+print("string attribute output = ",res.string)
+print("--"*30)
+
+# Example of using r as prefix.
+# Searching for \\ in the following string
+text = r'search \\ in this string'
+# searching using r as prefix
+res = re.search(r"\\",text)
+print("With r as prefix = ",res)
+
+Output:
+Match object = <re.Match object; span=(41, 49), match='computer'>
+------------------------------------------------------------
+group method output =  computer
+------------------------------------------------------------
+start method output =  41
+------------------------------------------------------------
+end method output =  49
+------------------------------------------------------------
+span method output =  (41, 49)
+------------------------------------------------------------
+re attribute output =  re.compile('computer')
+------------------------------------------------------------
+string attribute output =  Alan Turing was a pioneer of theoretical computer science and artificial intelligence. He was born on 23 June 1912 in Maida Vale, London
+------------------------------------------------------------
+With r as prefix =  <re.Match object; span=(7, 8), match='\\'>
+
+
+                                #Date Time Module
+
+DateTime module is provided in Python to work with dates and times.
+DateTime, is an inbuilt module rather than being a primitive data type,
+
+
+
+
+The `datetime` module in Python provides various classes and functions to handle and manipulate dates and times. Below is a simplified summary of key concepts and examples from your content:
+
+### 1. **Importing the `datetime` Module**
+To work with dates and times in Python, we first need to import the `datetime` module:
+
+import datetime
+```
+
+### 2. **Working with Date and Datetime Classes**
+- **`date` Class**: This class is used to represent a date in the format `YYYY-MM-DD`. You provide the year, month, and day to create a date object.
+  
+  import datetime
+  user_date = datetime.date(2021, 10, 20)
+  print(user_date)  # Output: 2021-10-20
+
+
+- **`datetime` Class**: This class represents both date and time in the format `YYYY-MM-DD HH:MM:SS.MMMMMM`.
+  
+  import datetime
+  user_datetime = datetime.datetime(2021, 10, 20, 14, 30, 20)
+  print(user_datetime)  # Output: 2021-10-20 14:30:20
+
+
+### 3. **Time Class**
+The `time` class is used to represent the time of day (without the date). You can specify hour, minute, second, and microsecond.
+
+import datetime
+time_example = datetime.time(12, 30, 45)
+print(time_example)  # Output: 12:30:45
+```
+
+### 4. **Timedelta Class**
+The `timedelta` class is used to represent the difference between two dates or times. You can specify days, hours, minutes, etc.
+
+import datetime
+delta1 = datetime.timedelta(days=5)
+delta2 = datetime.timedelta(hours=2)
+difference = delta1 - delta2
+print(difference)  # Output: 4 days, 22:00:00
+```
+
+### 5. **Methods in the `datetime` Class**
+- **`today()`**: Returns the current local date.
+  
+  print(datetime.date.today())  # Output: 2021-10-22
+
+
+- **`now()`**: Returns the current local date and time.
+  
+  print(datetime.datetime.now())  # Output: 2021-10-22 14:30:20.123456
+
+
+- **`strftime()`**: Converts a datetime object into a formatted string.
+  
+  now = datetime.datetime.now()
+  print(now.strftime('%Y-%m-%d %H:%M:%S'))  # Output: 2021-10-22 14:30:20
+
+
+- **`strptime()`**: Converts a string into a datetime object based on the provided format.
+  
+  date_str = '2021-10-22 14:30:20'
+  datetime_obj = datetime.datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+  print(datetime_obj)  # Output: 2021-10-22 14:30:20
+
+
+### 6. **Working with Time Zones**
+To work with time zones, you can use the `pytz` library.
+
+import pytz
+now = datetime.datetime.now(pytz.timezone('US/Central'))
+print(now)  # Output: 2021-10-22 14:30:20-05:00
+```
+
+### 7. **Converting Dates to Timestamps**
+You can get the timestamp (the number of seconds since Jan 1, 1970) of a `datetime` object.
+
+timestamp = datetime.datetime.now().timestamp()
+print(timestamp)  # Output: 1634458420.0 (example timestamp)
+```
+
+### 8. **Finding the Day of the Week**
+You can find the full name of the day for any given date:
+
+now = datetime.datetime.now()
+print(now.strftime('%A'))  # Output: Sunday
+```
+
+### 9. **Finding the Day Count, Month, Year**
+You can extract the day, month, and year from a date object:
+
+date_obj = datetime.date(2021, 10, 22)
+print(date_obj.day)   # Output: 22
+print(date_obj.month) # Output: 10
+print(date_obj.year)  # Output: 2021
+```
+
+### 10. **Generating a List of Dates Between Two Dates**
+You can generate a list of all dates between two given dates using a loop.
+
+import datetime
+
+def generate_dates(start_date, end_date):
+    delta = datetime.timedelta(days=1)
+    current_date = start_date
+    while current_date <= end_date:
+        print(current_date)
+        current_date += delta
+
+start_date = datetime.date(2021, 10, 20)
+end_date = datetime.date(2021, 10, 25)
+generate_dates(start_date, end_date)
+```
+This will print:
+```
+2021-10-20
+2021-10-21
+2021-10-22
+2021-10-23
+2021-10-24
+2021-10-25
+```
+
+### Conclusion
+The `datetime` module is powerful for working with dates, times, and time intervals. You can easily create date and time objects, manipulate them, calculate differences, and format them for display. The additional use of the `pytz` library helps when working with time zones.
+
+
+from datetime import datetime
+
+# Get current date and time
+now = datetime.now()
+
+# Format the date and time using various format codes
+formatted_date = now.strftime("%Y-%m-%d %H:%M:%S")
+formatted_weekday = now.strftime("%A")
+formatted_month = now.strftime("%B")
+formatted_year = now.strftime("%y")
+
+# Print the formatted date and time
+print("Formatted Date and Time:", formatted_date)
+print("Full Weekday Name:", formatted_weekday)
+print("Full Month Name:", formatted_month)
+print("Two-Digit Year:", formatted_year)
+
+This code shows how to use some of the most common format codes like:
+
+%Y for full year
+%A for full weekday name
+%B for full month name
+%y for two-digit year
+
+Here's a list of the most commonly used `strftime()` format codes in **plain text**:
+
+- `%Y` - Year with century (e.g., 2024)
+- `%y` - Two-digit year (e.g., 24 for 2024)
+- `%m` - Month as zero-padded number (01 to 12)
+- `%B` - Full month name (e.g., January, February)
+- `%b` - Abbreviated month name (e.g., Jan, Feb)
+- `%d` - Day of the month as zero-padded number (01 to 31)
+- `%A` - Full weekday name (e.g., Monday, Tuesday)
+- `%a` - Abbreviated weekday name (e.g., Mon, Tue)
+- `%H` - Hour (24-hour clock) as zero-padded number (00 to 23)
+- `%I` - Hour (12-hour clock) as zero-padded number (01 to 12)
+- `%M` - Minute as zero-padded number (00 to 59)
+- `%S` - Second as zero-padded number (00 to 59)
+- `%p` - AM or PM (uppercase)
+- `%P` - am or pm (lowercase)
+- `%z` - UTC offset in the form +HHMM or -HHMM (e.g., +0100)
+- `%Z` - Time zone name (e.g., UTC, EST)
+- `%j` - Day of the year (001 to 366)
+- `%U` - Week number of the year (Sunday as the first day of the week)
+- `%W` - Week number of the year (Monday as the first day of the week)
+- `%c` - Locale’s date and time representation (e.g., Tue Mar 15 14:32:24 2024)
+- `%x` - Locale’s date representation (e.g., 03/15/24)
+- `%X` - Locale’s time representation (e.g., 14:32:24)

@@ -1,0 +1,319 @@
+# Numbers in Python
+
+In Python Numbers, there are four built-in numeric data types namely integer, floating point numbers, double, and complex numbers.
+
+We can represent a binary number in Python using a 0b prefix to the number in 0b1110, hexadecimal numbers using the prefix 0x as in 0x1117, and octal numbers using the prefix 0o as in 0o1117.
+
+myNum1 = 1117
+myNum2 = 0x1117
+myNum3 = 0o1117
+myNum4 = 0b1110
+
+print("Data Type of 1117 is {}".format(type(myNum1)))
+print("Data Type of 0x1117 is {}".format(type(myNum2)))
+print("Data Type of 0o1117 is {}".format(type(myNum3)))
+print("Data Type of 0b1110 is {}".format(type(myNum4)))
+
+- Float Data Type in Python
+
+myNum = 11.17
+print("Data Type of {} is {}".format(myNum, type(myNum)))
+
+- Complex Numbers in Python
+
+myNum= 3+ 2j
+print("Data type of {} is {}:".format(myNum,type(myNum)))
+
+Output: Data type of (3+2j) is <class 'complex'>:
+
+? using complex method
+myNum= complex(3,2)
+print("Data type of {} is {}:".format(myNum,type(myNum)))
+
+? access the real and imaginary part of a complex number using its attributes “real” and “imag” respectively as follows.
+
+myNum= complex(3,2)
+realPart = myNum.real
+imagPart = myNum.imag
+print("Real part of {} is {}".format(myNum,realPart))
+print("Imaginary part of {} is {}".format(myNum,imagPart))
+
+? find the conjugate of the complex number using the conjugate() method.
+
+myNum= complex(3,2)
+conjugateNum= myNum.conjugate()
+print("Conjugate of {} is {}".format(myNum,conjugateNum))
+
+- Data Type Conversion in Python
+
+? String to Integer Conversion
+
+myString="1117"
+myInt= int(myString)
+print("The data type of {} is {}.".format(myInt,type(myInt)))
+
+Here, the string can contain only the combination of digits from 0 to 9
+
+? String to Float Conversion
+
+myString="11.17"
+myFloat= float(myString)
+print("The data type of {} is {}.".format(myFloat,type(myFloat)))
+
+The string given to the float() method must consist of only the decimal digits and a period i.e. decimal point (.) may be present in between them.
+
+? String to Decimal Conversion
+
+import decimal
+myString="11.17"
+myDec= decimal.Decimal(myString)
+print("The data type of {} is {}.".format(myDec,type(myDec)))
+
+Output:
+The data type of 11.17 is <class'decimal.Decimal'>.
+
+? String to Fraction Conversion
+
+import fractions
+myString="11/17"
+myFrac= fractions.Fraction(myString)
+print("The data type of {} is {}.".format(myFrac,type(myFrac)))
+
+The data type of 11/17 is <class 'fractions.Fraction'>.
+
+- Any of the alphabet or punctuation mark is involved then raise ValueError will be thrown
+
+? Integer to Float Conversion
+
+myInt=1117
+myFloat=float(1117)
+print("The data type of {} is {}.".format(myFloat,type(myFloat)))
+
+Output:
+The data type of 1117.0 is <class 'float'>.
+
+? Float to Integer Conversion
+
+myFloat=1117.23
+myInt=int(myFloat)
+print("The data type of {} is {}.".format(myInt,type(myInt)))
+
+? Float to Decimal Conversion
+
+import decimal
+myFloat=1117.23
+myDec=decimal.Decimal(myFloat)
+print("The data type of {} is {}.".format(myDec,type(myDec)))
+
+Output:
+The data type of 1117.23000000000001818989403545856475830078125 is <class 'decimal.Decimal'>.
+
+? Decimal to Float Conversion
+
+import decimal
+myDec=decimal.Decimal("11.17")
+
+myFloat=float(myDec)
+print("The data type of {} is {}.".format(myFloat,type(myFloat)))
+
+The data type of 11.17 is <class 'float'>.
+
+? Float to Fraction Conversion
+
+import fractions
+myFloat=11.17
+myFrac= fractions.Fraction(myFloat)
+print("The data type of {} is {}.".format(myFrac,type(myFrac)))
+
+The data type of 6288150979716055/562949953421312 is <class 'fractions.Fraction'>.
+
+In the above output, numerator and denominator values are very large. We can restrict the value of the numerator and denominator using the limit_denominator() method.
+
+The data type of 1117/100 is <class 'fractions.Fraction'>.
+
+? Fraction to Float Conversion
+
+import fractions
+myFrac= fractions.Fraction("1117/100")
+
+myFloat=float(myFrac)
+print("The data type of {} is {}.".format(myFloat,type(myFloat)))
+
+The data type of 11.17 is <class 'float'>.
+
+? Fraction to Decimal Conversion
+
+You cannot convert a fraction to a decimal value.
+
+? Decimal to Fraction Conversion
+
+import fractions
+import decimal
+myDec= decimal.Decimal("11.17")
+
+myFrac= fractions.Fraction(myDec)
+print("The data type of {} is {}.".format(myFrac,type(myFrac)))
+
+The data type of 1117/100 is <class 'fractions.Fraction'>.
+
+? Mathematical Functions in the Math Module
+
+- math.ceil()
+
+This function rounds a floating point number to the nearest integer greater than the number.
+
+import math
+myNum=11.17
+result=math.ceil(myNum)
+print("Ceiling of {} is {} and type is {}.".format(myNum,result,type(result)))
+
+Output
+Ceiling of 11.17 is 12 and type is <class 'int'>.
+
+When an integer is passed to the function as input, the output remains the same as the input number.
+
+- math.floor()
+
+This function rounds a floating point number to the nearest integer less than the number given as input.
+
+import math
+myNum=11.17
+result=math.floor(myNum)
+print("Floor of {} is {}.".format(myNum,result))
+
+Floor of 11.17 is 11.
+
+When an integer is passed to the function as input, the output remains the same as the input number.
+
+- math.exe()
+This function takes a number, say x as input and returns ex (exponential of x) .Here e is the Euler’s number having value 2.718282.
+
+import math
+myNum=11
+result=math.exp(myNum)
+print("Exponential of {} is {}.".format(myNum,result))
+
+- math.factorial()
+
+This function is used to calculate the factorial of a number as follows.
+
+import math
+myNum=11
+result=math.factorial(myNum)
+print("Factorial of {} is {}.".format(myNum,result))
+
+Factorial of 11 is 39916800.
+
+Factorial of a number is defined only for non negative integers.
+e.g math.factorial(11.72) will output error
+
+- math.gcd()
+
+The gcd() function calculates the greatest common divisor of two numbers.
+
+import math
+result=math.gcd(23,45)  // the input arguments must be integers.
+print("Greatest common divisor of 23 and 45 is {}.".format(result))
+
+- math.log()
+
+The log() function calculates the logarithm of a positive number to a specified base.
+
+import math
+myNum=1117
+result=math.log(myNum,5)
+print("Log of {} to base 5 is {}.".format(myNum,result))
+
+Log of 1117 to base 5 is 4.360778222537724.
+
+If there is no input given as base, the function calculates the natural log of the input number (with base e).
+
+import math
+myNum=1117
+result=math.log(myNum)
+print(" Natural Log of {}  is {}.".format(myNum,result))
+
+Logarithms are not defined for 0 and negative numbers.
+
+- math.log10()
+
+The log10() function is used to calculate the logarithm of a positive number to the base 10.
+
+import math
+myNum=1117
+result=math.log10(myNum)
+print("Log of {} to base 10 is {}.".format(myNum,result))
+
+Logarithms are not defined for 0 and negative numbers.
+
+- math.log2()
+
+The log2() function is used to calculate the logarithm of a positive number to the base.
+
+import math
+myNum=1117
+result=math.log2(myNum)
+print("Log of {} to base 2 is {}.".format(myNum,result))
+
+- math.sqrt()
+
+The sqrt() function is used to calculate the square root of non negative numbers.
+
+import math
+myNum=1117
+result=math.sqrt(myNum)
+print("Square root of {} is {}.".format(myNum,result))
+
+- math.pow()
+
+The pow() function is used to calculate power of one number to another.
+
+import math
+result=math.pow(3,4)
+print("3 raised to power 4 is {}.".format(result))
+
+- Trigonometric Functions
+
+? math.sin(), math.tan(), math.cos(), math.asin(), math.acos(), math.atan()
+
+import math
+myNum=1117
+result=math.sin(myNum)
+print("Sine of {} is {}.".format(myNum,result))
+
+
+Constant	        Value
+math.e	    Euler’s Number (2.718281828459045)
+math.inf	Positive infinity(inf)
+math.nan	Not a Number(nan)
+math.pi	    Pi (3.141592653589793)
+math.tau	Tau (6.283185307179586)
+
+? Random Numbers in Python
+
+The random() function generates a random floating point number when executed as shown in the example below.
+
+import random
+myNum=random.random()
+print("The random float value is:",myNum)
+
+The random float value is: 0.4202905716521448
+
+To generate a random integer value, you can use the randint() function. The function takes the upper limit and lower limit of values as input arguments and returns a random integer between them as follows.
+
+import random
+myNum=random.randint(0,100)
+print("The random Integer value is:",myNum)
+
+The random Integer value is: 30
+
+
+
+
+
+
+
+
+
+
+

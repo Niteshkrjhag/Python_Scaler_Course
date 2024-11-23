@@ -1,0 +1,328 @@
+Generators in Python are used to create iterators and return a traversal object. It helps in traversing all the items one at a time with the help of the keyword yield.
+
+in the normal function, we use the return keyword to return the values, and in the generator function, instead of using the return, we use yield to execute our iterator.
+
+ 
+- Yield
+It is used in generator functions.	
+
+It is responsible for controlling the flow of the generator function. After returning the value from yield, it pauses the execution by saving the states
+
+- Return 
+It is used in normal functions.
+
+Return statement returns the value and terminates the function.
+
+
+# Difference Between Generator Function & Normal Function
+
+In generator functions, there are one or more yield functions, whereas, in Normal functions, there is only one function
+When the generator function is called, the normal function pauses its execution, and the call is transferred to the generator function.
+Local variables and their states are remembered between successive calls.
+When the generator function is terminated, StopIteration is called automatically on further calls.
+
+? Python Generators With a Loop
+
+def seq(x):
+    for i in range(x):
+        yield i
+      
+range_ = seq(10)
+print(next(range_))
+print(next(range_))
+print(next(range_))
+print(next(range_))
+print(next(range_))
+print(next(range_))
+print(next(range_))
+print(next(range_))
+print(next(range_))
+print(next(range_))
+print(next(range_)) 
+
+- Output:
+
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+Traceback (most recent call last):
+  File "abc.py", line 17, in <module>
+    print(next(range_))
+StopIteration
+
+
+In Python, there are some ways to create a generator function.
+
+Using a Yield statement
+Using Python Generator Expression
+
+ lambda function is an anonymous function, and generator functions are anonymous.
+
+ # Python Generator function 
+
+ list comprehension and generator expression is list comprehension returns a list of items, whereas generator expression returns an iterable object.
+
+ x = 10
+gen = (i for i in range(x) if i % 2 == 0)   # Generator expression
+
+list_ = [i for i in range(x) if i % 2 == 0]  # List comprehension
+
+print(gen)
+print(list_)
+for j in gen:
+    print(j)
+
+
+output:
+
+<generator object <genexpr> at 0x000002471CF1FAC0>
+[0, 2, 4, 6, 8]
+0
+2
+4
+6
+8
+
+(i for i in range(x) if i % 2 == 0) in this generator expression, the first part is the yield part, and next is the for loop, followed by the if statement.
+
+# Uses of Generators in Python:
+
+Easy to Implement: Simplify creating iterators by using yield instead of defining __iter__() and __next__() methods.
+Memory Efficient: Generate items one at a time without creating a full sequence in memory.
+Support Infinite Sequences: Handle infinite streams of data efficiently, producing items on demand.
+
+def infinite():
+    n = 0
+    while True:
+        yield n
+        n += 1
+        
+for i in infinite():
+    if i%4 == 0:
+        continue
+    elif i == 13:
+        break
+    else:
+        print(i)
+
+# Output
+
+1
+2
+3
+5
+6
+7
+9
+10
+11
+
+? point to remember 
+
+Generator functions in Python are used to create iterators and return an iterator object.
+
+In the generator function, we use a yield statement instead of a return statement.
+
+We can use multiple yield statements in the generator function.
+
+When iterating over the generator function using next, in the end, it will show up StopIteration error, whereas when we use the for loop, it doesn't show any error.
+
+Generator Expressions are anonymous functions. They are implemented as similar to a list comprehension, and the only difference is that they use round parentheses instead of square parentheses.
+
+# What will be the output of the following Python Code?
+def reverse(str):
+  while True:
+    yield str
+    str = str[::-1]
+
+reversed_ = reverse("Scaler")
+next(reversed_)
+next(reversed_)
+next(reversed_)
+print(next(reversed_))
+
+? Answer
+
+Let's break down the code step-by-step to understand its execution process and determine the output:
+
+---
+
+### Code Analysis
+
+def reverse(str):
+  while True:
+    yield str
+    str = str[::-1]
+
+
+1. reverse() is a generator function:
+   - It contains the yield keyword, so calling it returns a generator object, not a regular function result.
+   - Inside the generator:
+     - The yield statement pauses the function, saving its state, and returns the current value of str.
+     - The statement str = str[::-1] reverses the string str and updates it for the next iteration.
+
+---
+
+2. Execution Steps:
+
+reversed_ = reverse("Scaler")
+
+- A generator object reversed_ is created from the reverse() function, initialized with "Scaler".
+
+---
+
+
+next(reversed_)
+
+- The generator starts executing.
+  - yield str returns "Scaler".
+  - After yielding, str = str[::-1] is executed, reversing the string. Now, str = "relaSc".
+
+---
+
+
+next(reversed_)
+
+- The generator resumes from where it left off:
+  - yield str returns "relaSc".
+  - str = str[::-1] is executed, reversing the string again. Now, str = "Scaler".
+
+---
+
+
+next(reversed_)
+
+- The generator resumes:
+  - yield str returns "Scaler".
+  - str = str[::-1] is executed again, reversing the string. Now, str = "relaSc".
+
+---
+
+print(next(reversed_))
+
+- The generator resumes:
+  - yield str returns "relaSc".
+  - str = str[::-1] is executed, reversing the string back to "Scaler".
+
+---
+
+### Output
+The sequence of values returned by next(reversed_):
+1. "Scaler"
+2. "relaSc"
+3. "Scaler"
+4. "relaSc"
+
+So, the final print(next(reversed_)) outputs:
+
+
+relaSc
+
+! Question 
+
+
+
+alphabets = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+vowels = 'AEIOU'
+
+
+########BLOCK#########
+def gen_():
+  for a in alphabets:
+    if (a in vowels):
+      yield a
+gen = gen_()
+#######################
+
+
+for a in gen:
+  print(a)
+
+
+a)gen = (a for a in alphabets if (a in vowels))
+b)gen = [a for a in alphabets if (a in vowels)]
+c)gen = {a for a in alphabets if (a in vowels)}
+d)all of the above
+
+which one is correct 
+
+Let's analyze the provided blocks of code and the associated statements one by one:
+
+---
+
+### Code Explanation
+
+1. Given Constants:
+   python
+   alphabets = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+   vowels = 'AEIOU'
+   
+
+2. First Block (Generator Function):
+   python
+   def gen_():
+       for a in alphabets:
+           if (a in vowels):
+               yield a
+   gen = gen_()
+   
+   - This is a generator function that yields each vowel from alphabets.
+   - Using for a in gen: iterates through the vowels one by one, printing each.
+
+---
+
+### Evaluating Other Assignments
+
+1. Generator Expression:
+   python
+   gen = (a for a in alphabets if (a in vowels))
+   
+   - This is a generator expression that produces the same result as the generator function.
+   - gen is an iterator-like object that generates vowels one at a time.
+
+2. List Comprehension:
+   python
+   gen = [a for a in alphabets if (a in vowels)]
+   
+   - This is a list comprehension.
+   - gen is a list containing all vowels from alphabets (['A', 'E', 'I', 'O', 'U']).
+
+3. Set Comprehension:
+   python
+   gen = {a for a in alphabets if (a in vowels)}
+   
+   - This is a set comprehension.
+   - gen is a set containing all vowels from alphabets ({'A', 'E', 'I', 'O', 'U'}).
+   - Since a set is unordered, its elements may appear in any order.
+
+---
+
+### Key Differences
+- Generator Function and Generator Expression:
+  - Both yield elements one at a time and don't store them in memory.
+  - Can be used in for loops to lazily iterate over vowels.
+
+- List Comprehension:
+  - Creates a list, storing all vowels in memory at once.
+
+- Set Comprehension:
+  - Creates a set, which is unordered and unique (though uniqueness doesn't matter here as vowels are distinct).
+
+---
+
+### Are All Valid?
+Yes, all the given statements are valid, but their behavior differs:
+
+- The generator function and generator expression yield one vowel at a time.
+- The list comprehension and set comprehension produce a complete collection (list or set) of vowels immediately.
+
+---
+
+### Final Answer: "All of the above"

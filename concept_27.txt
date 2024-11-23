@@ -1,0 +1,191 @@
+# Packing and Unpacking in Python
+
+A) Unpacking in Python refers to the process of taking elements from iterable objects like tuples, lists, or dictionaries and assigning them to variables. This feature simplifies the handling of compound data structures and enhances code readability.
+
+i)Unpacking tuples
+- Tuples, immutable sequences of Python objects, are often used to group data. Unpacking tuples is a common practice where each element of a tuple is assigned to a separate variable
+
+? coordinates = (1, 2, 3)
+x, y, z = coordinates
+print(x, y, z)
+
+Output = 1 2 3
+
+? # Nested tuple
+nested_tuple = (1, (2, 3))
+
+# Unpacking
+a, (b, c) = nested_tuple
+
+ii) Unpacking Iterables
+
+- Beyond tuples, Python allows the unpacking of other iterable objects, such as lists and strings.
+
+data = [100, 200, 300]
+a, b, c = data
+print(a, b, c)
+
+? # String of characters
+   my_string = "abc"
+
+# Unpacking
+? x, y, z = my_string
+  print(x, y, z)
+
+# List with more elements than variables
+? my_list = [1, 2, 3, 4, 5]
+
+# Unpacking first two, rest in a list
+  a, b, *rest = my_list
+  print(a, b, rest)
+
+Output : 1 2 [3, 4, 5]
+
+
+? B) packing 
+
+- ->Packing is the opposite process of unpacking. It involves taking multiple arguments or elements and condensing them into a single iterable object, like a tuple.
+
+? i) Packing with * Operators
+
+The asterisk (*), known as the star operator, is used in Python to pack arguments into a tuple. This allows functions to accept an arbitrary number of arguments, providing flexibility in function calls.
+
+def sum_all(*args):
+    return sum(args)
+
+print(sum_all(1, 2, 3, 4))
+
+a, b, c = 1, 2, 3
+packed = (*[a, b, c],)
+print(packed)
+
+Output: (1, 2, 3)
+
+
+? C) Packing and Unpacking
+
+- i) Assigning in Parallel
+    
+    a, b = 5, 10
+    print(a, b)
+
+    a, b = 5, 10
+    print(a, b)
+
+- ii) Swapping Values Between Variables
+
+    a, b = 1, 2
+    a, b = b, a
+    print(a, b)
+
+- iii) Dropping Unnecessary Values With *
+
+    Sometimes, not all values from an iterable are needed. Python's star operator can be used to assign only the required elements to variables and discard the rest. 
+
+    a, *_, b = [1, 2, 3, 4, 5]
+    print(a, b)  // 1 5
+
+    *_, x, y = "abcdefg"
+    print(x, y)         // f given
+
+    for a, *_, b in [(1, 2, 3, 4), (5, 6, 7, 8)]:
+        print(a, b)     // 1 4
+                       //  1 5
+
+- iv) Returning Tuple in the Functions
+
+-> Functions in Python can return multiple values. This is typically done by returning the values as a tuple, which can then be unpacked by the function caller.
+
+-> def get_values():
+    return 1, 2
+
+a, b = get_values()
+print(a, b)    // 1 2
+
+-> def get_data():
+    return "Hello", [1, 2, 3]
+
+string, list = get_data()
+print(string, list)   // Hello [1, 2, 3]
+
+
+-> 
+def nested_values():
+    return (1, 2), (3, 4)
+
+(a, b), (c, d) = nested_values()   
+print(a, b, c, d)                   // 1 2 3 4
+
+? v) Merging Iterables With the * Operators
+
+- The star operator can also be used to merge multiple iterables into a single iterable.
+? VVVVVVVVVVIIIIIIIIII
+- When you use the unpacking operator (*) with a list, it extracts (or “unpacks”) each element from that list and passes them individually into the new list (or function, if you’re passing arguments).
+
+list1 = [1, 2]
+list2 = [3, 4]
+merged = [*list1, *list2]
+print(merged)  // [1, 2, 3, 4]
+
+string = "AB"
+numbers = [1, 2]
+merged = [*string, *numbers]
+print(merged)  // ['A','B',1 , 2]
+
+a = [1, 2]
+b = (3, 4)
+c = "56"
+merged = [*a, *b, *c]
+print(merged)  // [1, 2, 3, 4, '5', '6']
+
+
+? vi) Unpacking Dictionaries With the * Operator
+
+- Unpacking dictionaries with the star operator retrieves the keys of the dictionary. This feature is useful when the keys of a dictionary are needed separately from the values. An additional double star operator (**) can be used to unpack both keys and values.
+
+my_dict = {'a': 1, 'b': 2}
+keys = [*my_dict]
+print(keys)   //  ['a', 'b']
+
+my_dict = {'x': 3, 'y': 4}
+items = [*my_dict.items()]
+print(items)   // [('x', 3), ('y', 4)]   
+
+dict1 = {'a': 1}
+dict2 = {'b': 2}
+merged = {**dict1, **dict2}
+print(merged)   // {'a': 1, 'b': 2}
+
+? vii) Unpacking in For Loops
+
+for a, b in [(1, 2), (3, 4)]:
+    print(a, b)   // 1 2 
+                //   3 4
+
+for (a, b), c in [((1, 2), 3), ((4, 5), 6)]:
+    print(a, b, c)   // 1 2 3
+                     // 4 5 6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

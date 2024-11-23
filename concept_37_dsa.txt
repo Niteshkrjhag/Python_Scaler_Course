@@ -1,0 +1,106 @@
+? Data structures in python provide us with a way of storing and arranging data that is easily accessible and modifiable. These data structures include collections. Some of the most commonly used built-in collections are lists, sets, tuples and dictionary.
+
+
+? Key Difference Between List, Tuple, Set, and Dictionary in Python
+
+- Mutability:
+
+List: Mutable (modifiable).
+Tuple: Immutable (non-modifiable).
+Set: Mutable, but elements inside must be immutable.
+Dictionary: Mutable; keys are immutable, but values can change.
+Order:
+
+- Order:
+
+List: Maintains order of elements.
+Tuple: Maintains order of elements.
+Set: No guaranteed order.
+Dictionary: As of Python 3.7+, insertion order is preserved.
+Uniqueness:
+
+- Uniqueness:
+
+List: Allows duplicates.
+Tuple: Allows duplicates.
+Set: Only unique elements.
+Dictionary: Unique keys, values can be duplicated.
+Data Structure:
+
+- Data Structure:
+
+List: Ordered collection.
+Tuple: Ordered collection.
+Set: Unordered collection.
+Dictionary: Collection of key-value pairs.
+
+# Operations on list 
+
+Key Differences Between Dictionary, List, Set, and Tuple
+
+! Syntax
+Dictionary: Uses curly brackets { } with key-value pairs separated by commas.
+List: Employs square brackets [ ] with comma-separated elements.
+Set: Utilizes curly brackets { } with comma-separated elements.
+Tuple: Employs parentheses ( ) with comma-separated elements.
+
+! Order
+Dictionary: Maintains order in Python 3.7+ but is unordered in Python 3.6.
+List: Maintains order.
+Set: Unordered.
+Tuple: Maintains order.
+
+! Duplicate Data
+Dictionary: Keys are unique, values can be duplicated.
+List: Allows duplicate elements.
+Set: Does not allow duplicate elements.
+Tuple: Allows duplicate elements.
+
+
+! Indexing
+Dictionary: Key-based indexing.
+List: Integer-based indexing starting from 0.
+Set: No index-based mechanism.
+Tuple: Integer-based indexing starting from 0.
+
+! Adding Elements
+Dictionary: Uses key-value pairs.
+List: New items can be added using append() method.
+Set: Uses add() method.
+Tuple: Being immutable, new data cannot be added.
+
+! Deleting Elements
+Dictionary: Uses pop(key) method to remove specified key and value.
+List: Uses pop() method to delete an element.
+Set: Uses pop() method to remove an element.
+Tuple: Being immutable, no data can be popped or deleted.
+
+! Sorting Elements
+Dictionary: Keys can be sorted using the sorted() method.
+List: Uses sort() method to sort elements.
+Set: Unordered, so sorting is not applicable.
+Tuple: Being immutable, data cannot be sorted.
+
+! Searching Elements
+Dictionary: Uses the get(key) method to retrieve value for a specified key.
+List: Uses index() method to search and return index of first occurrence.
+Set: Unordered, so searching is not applicable.
+Tuple: Uses index() method to search and return index of first occurrence.
+
+
+! Reversing Elements
+Dictionary: No integer-based indexing, so no reversal.
+List: Uses reverse() method to reverse elements.
+Set: Unordered, so reversing is not advised.
+Tuple: Being immutable, reverse method is not applicable.
+
+! Counting Elements
+Dictionary: count() not defined for dictionaries.
+List: Uses count() method to count occurrence of a specific element.
+Set: count() is not defined for sets.
+Tuple: Uses count() method to count occurrence of a specific element.
+
+? Dictionaries store data in the form of key-value pairs in python and remain a controversy when it comes to whether they’re ordered or unordered. As this varies with multiple versions of python. Python v<=3.6 has dictionaries as unordered, but at the same time, orderedDict was introduced in python 3.1, and then finally python 3.7 has both orderedDict and Dictionary and now both are ordered.
+
+
+

@@ -1,0 +1,896 @@
+Modules in Python can be defined as a Python file that contains Python definitions and statements. It contains Python code along with Python functions, classes, and Python variables. The Python modules are files with the .py extension.
+
+
+
+Thank you for pointing that out! Here’s a more concise and comprehensive version that includes the concept of importing modules only once per session, as well as other key concepts:
+
+---
+
+### Types of Python Modules
+
+1. **Inbuilt Modules**: Predefined modules available in Python (e.g., 'math', 'sys', 'os', 'random').
+2. **User-Defined Modules**: Custom modules created by users that include functions, classes, and variables.
+
+---
+
+### Importing Modules
+
+1. **Basic Import**:
+  
+   import math
+   print(math.pi)  # Output: 3.141592653589793
+   
+
+2. **Importing Specific Functions/Variables**:
+  
+   from math import sqrt, pi
+   print(sqrt(16))  # Output: 4.0
+   print(pi)  # Output: 3.141592653589793
+   
+
+3. **Importing All Functions/Variables from a Module**:
+  
+   from math import *
+   print(sin(0))  # Output: 0.0
+   
+
+---
+
+### Python Modules Search Path
+
+- When importing, Python checks these locations in order:
+  1. **Current Working Directory**
+  2. **Directories in 'PYTHONPATH' Environment Variable**
+  3. **Default Installation Directory**
+
+- To see the search path:
+ 
+  import sys
+  print(sys.path)
+  
+
+---
+
+### Renaming Modules
+
+- You can rename modules during import using 'as':
+ 
+  import math as m
+  print(m.pi)  # Output: 3.141592653589793
+  
+
+---
+
+### Reloading Modules
+
+- **Modules are only imported once per session**. If a module is updated, you need to use 'reload()' to get the latest version:
+ 
+  import imp
+  imp.reload(module_name)  # Reloads the module
+  
+
+---
+
+### dir() Function
+
+- 'dir()' returns all the attributes and functions in a module:
+ 
+  import math
+  print(dir(math))
+  
+
+---
+
+### Variables in Modules
+
+- Modules can contain variables such as lists, dictionaries, or custom objects. Example:
+ 
+  # variables.py
+  power = {1: 1, 2: 4, 3: 9}
+  
+  def factorial(n):
+      if n == 1 or n == 0:
+          return 1
+      else:
+          return n * factorial(n-1)
+  
+
+- Using these in another file:
+ 
+  import variables
+  print(variables.factorial(5))  # Output: 120
+  print(variables.power[2])  # Output: 4
+  
+
+---
+
+### Key Concepts
+
+1. **Modules are imported once per session**: Python loads a module only the first time it’s imported. If you want to reload it after changes, you must use 'reload()'.
+  
+2. **Importing Specific Items**: Use 'from <module> import <item>' to import specific functions or variables.
+
+3. **Search Path**: Python checks the current directory, then 'PYTHONPATH', then the default installation directories to find modules.
+
+---
+
+
+Here's a more concise version:
+
+---
+
+### Why Use 'from <module> import <item>' Instead of 'import <module>'?
+
+1. **Efficiency**:  
+   - 'import <module>' loads the entire module; you need to use the module name (e.g., 'math.sqrt(16)').
+   - 'from <module> import <item>' imports specific items, making the code cleaner and shorter (e.g., 'sqrt(16)').
+
+2. **Memory Usage**:  
+   - 'import <module>' loads the entire module, while 'from <module> import <item>' loads only the needed items.
+
+   **Example**:
+  
+   import math
+   print(math.sqrt(16))  # Requires prefix
+
+   from math import sqrt
+   print(sqrt(16))  # No need for prefix
+   
+
+---
+
+### Why Use 'from <module> import *'?
+
+- **Not Recommended**:  
+  It imports everything, making code unclear and risking name conflicts.
+
+   **Example**:
+  
+   from math import *  # Unclear which items are used
+   
+
+---
+
+### Importing a Module Once
+
+- A module is loaded **once per session**. Multiple imports of the same module will not reload it.
+
+   **Example**:
+  
+   import math
+   import math  # Doesn't reload, already imported
+   
+
+- To reload an updated module, use 'imp.reload()'.
+
+   **Example**:
+  
+   import imp
+   imp.reload(math)  # Reloads the math module
+   
+
+---
+
+### 'import <module>' vs. 'from <module> import <item>'
+
+- **'import <module>'**:  
+  - Loads the entire module.
+  - Access items by prefixing with module name.
+  - Useful when using many items from the module.
+
+- **'from <module> import <item>'**:  
+  - Imports only specific items.
+  - Direct access to functions/variables without prefix.
+  - Cleaner, more efficient.
+
+   **Example**:
+  
+   from math import pi
+   print(pi)  # No need to reference 'math'
+   
+
+---
+
+### Python Modules Search Path
+
+- **Order of Search**:
+  1. Current directory.
+  2. Directories in 'PYTHONPATH'.
+  3. Default Python directories.
+
+   **Example**:
+  
+   import sys
+   print(sys.path)  # Shows search paths
+   
+
+---
+
+### Renaming Modules
+
+- Use 'as' to rename a module when importing, for shorter references.
+
+   **Example**:
+  
+   import math as m
+   print(m.pi)  # Using renamed module
+   
+
+---
+
+### 'dir()' Function
+
+- **Purpose**: Lists all functions, classes, and variables in a module.
+
+   **Example**:
+  
+   import math
+   print(dir(math))  # Lists available functions in math
+   
+
+---
+
+This version focuses on key points and explains concepts in a clear, concise way.
+
+
+
+- VERY VERY IMPROTANT Quesiton
+
+=> numpy is not completely written in python language
+
+? numpy: While it provides a Python interface, much of its core functionality is implemented in C for performance reasons. This allows numpy to handle large arrays and matrices efficiently, leveraging low-level optimizations that are not possible in pure Python7.
+- math: This module is entirely written in Python and provides mathematical functions.
+# datetime: This module is also fully implemented in Python, providing classes for manipulating dates and times.
+! sys: Like math and datetime, sys is a standard library module implemented in Python.
+
+
+# Which of the following is not an advantage of using modules?
+
+1)It provides a means of reuse of program code
+2)It provides a means of dividing up tasks
+3)It provides a means of reducing the size of the program
+4)It provides a means of testing individual parts of the program
+
+=>
+
+
+It provides a means of reducing the size of the program.
+While modular programming can lead to better organization and reuse of code, it does not inherently reduce the size of the program. In fact, depending on how modules are implemented, they can sometimes increase the overall size due to additional dependencies or overhead associated with module management. The other options listed—reuse of program code, dividing up tasks, and testing individual parts—are all recognized advantages of using modules in programming.
+
+# Which of the statements about modules is false?
+
+1)Identifiers that begin with two underscores are private and aren't imported when using the "from-import" form of import.
+2)dir() built-in function monitors the items in the namespace of the main module
+3)In the “from-import” form of import, all identifiers regardless of whether they are private or public are imported
+4)When a module is loaded, a compiled version of the module with file extension .pyc is automatically produced
+
+To determine which statement about modules is false, let's analyze each one:
+
+Identifiers that begin with two underscores are private and aren't imported when using the "from-import" form of import.
+This statement is true. In Python, identifiers starting with two underscores (e.g., __private) are considered private and are not accessible when using the from module import * syntax.
+
+dir() built-in function monitors the items in the namespace of the main module.
+This statement is true. The dir() function returns a list of names in the current local scope when called without arguments, which includes items in the namespace of the main module123.
+
+In the “from-import” form of import, all identifiers regardless of whether they are private or public are imported.
+This statement is false. When using the from module import * syntax, only public identifiers (those not starting with an underscore) are imported. Private identifiers (those starting with an underscore) are not imported12.
+
+When a module is loaded, a compiled version of the module with file extension .pyc is automatically produced.
+This statement is true. When a Python module is imported, a compiled version with a .pyc extension is generated to optimize future imports1.
+
+Based on this analysis, the false statement is: "In the 'from-import' form of import, all identifiers regardless of whether they are private or public are imported."
+
+
+
+                                        # Package
+
+=> A package is a folder that contains various modules as files. Packages do the work of organizing files in Python. 
+
+https://scaler-topics-articles-md.s3.us-west-2.amazonaws.com/python-packages-writing-items.webp
+
+
+### Python Packages Overview
+
+- **Definition**: Packages in Python are folders containing modules (files) and sub-packages, providing an organized hierarchy. They ensure modularity and clarity in large projects.
+
+- **Real-Life Analogy**: Like organizing items (books, CDs, toys) into labeled boxes with sections for easy access, Python packages group related files logically. 
+
+- **Structure**:
+  - Each package contains an '__init__.py' file to mark it as a package.
+  - Sub-packages can exist within packages.
+  - Example structure:
+    
+    shifting_items/
+        __init__.py
+        books/
+            __init__.py
+            fiction.py
+            non_fiction.py
+        CDs/
+            __init__.py
+            music.py
+            dvd.py
+        toys/
+            __init__.py
+            soft_toys.py
+            games.py
+    
+
+---
+
+### Importing Modules from a Package
+
+- **Syntax**: 
+ 
+  import module1[, module2, ... moduleN]
+  
+  - Example: To use the 'edit' module from the 'Writing.Book' package:
+   
+    import Writing.Book.edit
+    Writing.Book.edit.plagiarism_check()
+    
+
+- **Simplified Import**:
+ 
+  from Writing.Book import edit
+  edit.plagiarism_check()
+  
+  - **Drawback**: Can cause conflicts if multiple packages have similarly named functions.
+
+By organizing code into packages, Python ensures better code reusability, modularity, and clarity.
+
+The syntax for importing modules from a package in Python is as follows:
+
+1. **Import Full Path**  
+   
+   import package_name.module_name
+   
+   - Example:
+     
+     import Writing.Book.edit
+     Writing.Book.edit.plagiarism_check()
+     
+
+2. **Import Specific Module**  
+   
+   from package_name import module_name
+   
+   - Example:
+     
+     from Writing.Book import edit
+     edit.plagiarism_check()
+     
+
+3. **Import Specific Function/Class/Variable**  
+   
+   from package_name.module_name import item_name
+   
+   - Example:
+     
+     from Writing.Book.edit import plagiarism_check
+     plagiarism_check()
+     
+
+4. **Import All Items** (Not recommended for clarity and potential conflicts)  
+   
+   from package_name.module_name import *
+    
+
+### Key Notes:
+- Use full paths to avoid naming conflicts when different packages have similarly named modules or functions.
+- Simplified imports improve readability but must be used cautiously to maintain clarity and avoid ambiguity.
+
+Here’s a concise and easy-to-understand version of the concepts while covering all the key points thoroughly:
+
+---
+
+### **Installing a Python Package Globally**
+
+To make a Python package available system-wide, follow these steps:
+
+1. **Ensure Pre-requisites**:
+   - Install or update pip and setuptools using:
+     bash
+     python -m pip install --upgrade pip setuptools
+     
+
+2. **Create a setup.py File**:
+   - In the package folder, define the setup script using setuptools.setup():
+     
+     from setuptools import setup
+
+     setup(
+         name='Writing',
+         version='1.0',
+         description='A Sample Package for all Writing Modules',
+         author='username',
+         author_email='username@gmail.com',
+         license='MIT',
+         packages=['Writing'],
+         zip_safe=False
+     )
+     
+
+3. **Install the Package**:
+   - Run the following command in the terminal from the package folder:
+     bash
+     pip install .
+     
+
+4. **Use the Installed Package**:
+   - Import it in any Python script:
+     
+     import Writing
+     Writing.some_function()
+     
+
+---
+
+### **Publishing a Package to PyPI**
+
+To share your package globally via PyPI:
+
+1. **Prepare the Package**:
+   - Include essential files like README.md and LICENSE.
+   - Ensure your package name is unique.
+
+2. **Register on PyPI**:
+   - Create an account at [PyPI](https://pypi.org).
+
+3. **Upload the Package**:
+   - Build and upload using twine:
+     bash
+     python -m pip install twine
+     python setup.py sdist
+     twine upload dist/*
+     
+
+4. **Install from PyPI**:
+   - Anyone can install the package using:
+     bash
+     python -m pip install [package_name]
+     
+
+---
+
+### **Importing Modules in Python**
+
+Modules are Python files containing functions, classes, or variables. You can import them in various ways:
+
+#### **Basic Import**
+
+import module_name
+module_name.function_name()
+
+
+#### **Selective Import**
+
+from module_name import function_name
+function_name()
+
+
+#### **Import Everything (Not Recommended)**
+
+from module_name import *
+
+
+#### **Aliased Import**
+
+import module_name as alias
+alias.function_name()
+
+
+---
+
+### **Importing Modules from Another Directory**
+
+If the module is in a different directory, use importlib:
+
+1. **Code Example**:
+   
+   import importlib.util
+
+   def import_module(module_name, module_path):
+       spec = importlib.util.spec_from_file_location(module_name, module_path)
+       module = importlib.util.module_from_spec(spec)
+       spec.loader.exec_module(module)
+       return module
+
+   module = import_module("module_name", "path/to/module.py")
+   print(module.some_function())
+   
+
+---
+
+### **Importing Classes and Functions from Another File**
+
+If you need to import a specific class or function:
+
+1. **Example: File Structure**:
+   - calc.py contains:
+     
+     class Calc:
+         def add(self, x, y): return x + y
+         def sub(self, x, y): return x - y
+     
+
+   - main.py contains:
+     
+     from calc import Calc
+
+     obj = Calc()
+     print(obj.add(10, 5))
+     
+
+2. **Importing Classes from Another Directory**:
+   - Use the same import_module approach:
+     
+     module = import_module("calc", "../calc.py")
+     obj = module.Calc()
+     print(obj.add(10, 5))
+     
+
+---
+
+### **Importing Built-in and Third-party Modules**
+
+1. **Built-in Modules**:
+   
+   import math
+   print(math.pi)
+   
+
+2. **Selective Import**:
+   
+   from math import pi, floor
+   print(pi)
+   print(floor(3.7))
+   
+
+3. **Aliased Import**:
+   
+   import math as m
+   print(m.pi)
+   
+
+---
+
+### **Key Concepts of Python Packages**
+
+1. **What is a Package?**
+   - A package is a folder containing an __init__.py file and submodules.
+   - Example structure:
+     
+     Writing/
+     ├── __init__.py
+     ├── Book/
+     │   ├── __init__.py
+     │   ├── edit.py
+     └── CD/
+         ├── __init__.py
+         ├── music.py
+     
+
+2. **Importing from a Package**:
+   
+   import Writing.Book.edit
+   Writing.Book.edit.some_function()
+
+   # Alternative
+   from Writing.Book import edit
+   edit.some_function()
+   
+
+3. **Avoiding Ambiguity**:
+   - Avoid importing similarly named modules or functions unless necessary.
+
+---
+
+This summary covers all aspects: installing and publishing packages, different import methods, and handling modules from various directories while maintaining simplicity and clarity.
+
+
+? summary 
+
+Python packages help in modularizing the code while ensuring code reusability.
+Common in-built Python packages include pip and setuptools.
+Classes, functions, modules, etc., can be imported from other modules using the import keyword.
+The' as' keyword refers to a module by another name.
+importlib is used while importing classes and functions from other directories.
+
+
+
+! question )
+
+1) Which of the following is not a valid namespace?
+
+
+Global namespace
+Built-in namespace
+Public namespace
+Local namespace
+
+In Python, there are several types of namespaces that help manage variable names and their scope. The valid namespaces include:
+Global Namespace: This encompasses names defined at the top level of a module or script. It is created when the main program starts and exists until the program terminates.
+Built-in Namespace: This contains names of built-in functions and objects, such as print() and len(), which are always available in any Python program.
+Local Namespace: This is created when a function is called and includes names defined within that function. It is destroyed when the function exits.
+Enclosing Namespace: This applies to nested functions, where the enclosing function's namespace is accessible to the inner function.
+
+
+? Which of the following is false about “import modulename” form of import?
+
+
+The namespace of imported module becomes part of importing module
+This form of import prevents name clash
+The namespace of imported module becomes available to importing module
+The identifiers in module are accessed as: modulename.identifier
+
+
+=> 
+When you use import modulename, the namespace of the imported module does not become part of the importing module; rather, it remains separate. This means that you access identifiers from the imported module using the syntax modulename.identifier, which helps avoid name clashes with identifiers in the importing module1.
+The namespace of the imported module becomes available to the importing module, but it does not merge with it1.
+Therefore, while this form of import provides a way to access identifiers using a namespace, it does not inherently prevent name clashes since identifiers can still have the same name in both modules.
+
+
+? What is the order of namespaces in which Python looks for an identifier?
+
+Python first searches the global namespace, then the local namespace and finally the built-in namespace
+Python first searches the local namespace, then the global namespace and finally the built-in namespace
+Python first searches the built-in namespace, then the global namespace and finally the local namespace
+Python first searches the built-in namespace, then the local namespace and finally the global namespace
+
+=> 
+
+The order in which Python looks for an identifier follows the LEGB rule, which stands for Local, Enclosing, Global, and Built-in namespaces. Here’s a breakdown of this order:
+Local Namespace: This is the first place Python checks for identifiers. It includes names defined within the current function or code block.
+Enclosing Namespace: If the identifier is not found in the local namespace, Python checks any enclosing functions (if applicable). This is relevant in cases of nested functions.
+Global Namespace: Next, Python searches the global namespace, which contains names defined at the module level.
+Built-in Namespace: Finally, if the identifier has not been found in any of the previous namespaces, Python checks the built-in namespace, which includes all built-in functions and exceptions.
+Thus, the correct order is: Local -> Enclosing -> Global -> Built-in 236.
+
+
+
+
+# Builtin Namespace
+# Python's built-in namespace includes functions like len(), print(), etc.
+print(len("Hello"))  # Built-in function: len()
+
+# Global Namespace
+x = "Global Variable"  # Global variable
+
+def outer_function():
+    # Enclosing Namespace
+    y = "Enclosing Variable"  # Variable in the enclosing scope
+
+    def inner_function():
+        # Local Namespace
+        z = "Local Variable"  # Local variable
+        print(z)  # Accessing local variable
+        print(y)  # Accessing enclosing variable
+        print(x)  # Accessing global variable
+        print(len("Python"))  # Accessing built-in namespace
+
+    inner_function()
+
+# Call the outer function to execute the inner function
+outer_function()
+
+A Container is a type of object that can be used to hold multiple items while simultaneously providing a way to access and iterate over them, such as a Tuple or a list.
+
+
+There are different containers which comes under collections module:
+
+namedtuple()
+OrderedDict()
+defaultdict()
+Counter()
+deque()
+Chainmap
+
+
+! q) What will be the output of the following program?
+
+from collections import namedtuple
+name = namedtuple('name', 'x, y') 
+print(name)
+
+? <class '__main__.name'>
+? <class '__main__.namedtuple'>
+? namedtuple('name', 'x, y')
+? ('name', 'x, y')
+
+
+=> <class '__main__.name'>
+This happens because namedtuple creates a new class called name, and printing name shows its type and module location.
+
+e.g 
+from collections import namedtuple
+name = namedtuple('var_name', 'x, y') 
+print(name)
+
+output:
+<class '__main__.var_name'>
+
+
+### **Python collections Module Overview**
+
+The collections module in Python provides specialized container data types to handle tasks efficiently. Here’s a brief overview of each container with examples:
+
+---
+
+### **1. namedtuple()**
+- A lightweight object type that works like a tuple with named fields for easy access.
+
+
+from collections import namedtuple
+
+# Example 1
+Point = namedtuple('Point', 'x, y')
+p = Point(10, 20)
+print(p.x, p.y)  # Output: 10 20
+
+# Example 2
+Person = namedtuple('Person', ['name', 'age'])
+person = Person('Alice', 25)
+print(person.name, person.age)  # Output: Alice 25
+
+
+---
+
+### **2. OrderedDict()**
+- A dictionary that maintains the order of key insertion.
+
+
+from collections import OrderedDict
+
+# Example 1
+od = OrderedDict()
+od['one'] = 1
+od['two'] = 2
+od['three'] = 3
+print(od)  # Output: OrderedDict([('one', 1), ('two', 2), ('three', 3)])
+
+# Example 2
+od['one'] = 10  # Changing value retains order
+print(od)  # Output: OrderedDict([('one', 10), ('two', 2), ('three', 3)])
+
+
+---
+
+### **3. defaultdict()**
+- A dictionary that provides a default value for missing keys.
+
+
+from collections import defaultdict
+
+# Example 1
+dd = defaultdict(int)
+dd['a'] += 1
+print(dd['a'], dd['b'])  # Output: 1 0
+
+# Example 2
+dd = defaultdict(list)
+dd['colors'].append('red')
+print(dd['colors'], dd['shapes'])  # Output: ['red'] []
+
+
+---
+
+### **4. Counter()**
+- A dictionary subclass for counting hashable objects.
+
+
+from collections import Counter
+
+# Example 1
+nums = [1, 2, 2, 3, 3, 3]
+counter = Counter(nums)
+print(counter)  # Output: Counter({3: 3, 2: 2, 1: 1})
+
+# Example 2
+words = ['apple', 'banana', 'apple', 'orange', 'banana']
+counter = Counter(words)
+print(counter)  # Output: Counter({'apple': 2, 'banana': 2, 'orange': 1})
+
+
+---
+
+### **5. deque()**
+- A double-ended queue for efficient appending and popping from both ends.
+
+
+from collections import deque
+
+# Example
+dq = deque(['a', 'b', 'c'])
+dq.append('d')
+dq.appendleft('z')
+print(dq)  # Output: deque(['z', 'a', 'b', 'c', 'd'])
+
+dq.pop()
+dq.popleft()
+print(dq)  # Output: deque(['a', 'b', 'c'])
+
+
+---
+
+### **6. ChainMap()**
+- Combines multiple dictionaries into a single view.
+
+
+from collections import ChainMap
+
+# Example
+dict1 = {'a': 1, 'b': 2}
+dict2 = {'b': 3, 'c': 4}
+cm = ChainMap(dict1, dict2)
+print(cm)  # Output: ChainMap({'a': 1, 'b': 2}, {'b': 3, 'c': 4})
+print(cm['b'])  # Output: 2 (from the first dictionary)
+
+
+---
+
+
+
+Here's a plain list of the inbuilt functions for each collection type:
+
+---
+
+### **1. 'namedtuple'**
+- **'_make(iterable)'**: Creates a new 'namedtuple' instance from an iterable.
+- **'_asdict()'**: Returns a dictionary representation of the 'namedtuple'.
+- **'_replace(**kwargs)'**: Returns a new 'namedtuple' instance with specified fields replaced.
+- **'_fields'**: Returns a tuple of field names of the 'namedtuple'.
+- **'_field_defaults'**: Returns default values for fields if set during creation.
+
+---
+
+### **2. 'OrderedDict'**
+- **'pop(key[, default])'**: Removes and returns the value for the specified key.
+- **'popitem(last=True)'**: Removes and returns the last (or first if 'last=False') key-value pair.
+- **'move_to_end(key, last=True)'**: Moves the specified key to the end (or beginning if 'last=False').
+- **'clear()'**: Removes all items from the dictionary.
+- **'items()'**: Returns a view of the dictionary's items.
+- **'keys()'**: Returns a view of the dictionary's keys.
+- **'values()'**: Returns a view of the dictionary's values.
+- **'update([other])'**: Updates the dictionary with key-value pairs from another dictionary or iterable.
+
+---
+
+### **3. 'defaultdict'**
+- **'default_factory'**: Attribute used to define the default type for missing keys.
+- **'clear()'**: Removes all items from the dictionary.
+- **'items()'**: Returns a view of the dictionary's items.
+- **'keys()'**: Returns a view of the dictionary's keys.
+- **'values()'**: Returns a view of the dictionary's values.
+- **'pop(key[, default])'**: Removes and returns the value for the specified key.
+- **'popitem()'**: Removes and returns an arbitrary key-value pair.
+- **'update([other])'**: Updates the dictionary with key-value pairs from another dictionary or iterable.
+
+---
+
+### **4. 'Counter'**
+- **'elements()'**: Returns an iterator over elements, repeating each according to its count.
+- **'most_common([n])'**: Returns a list of the 'n' most common elements and their counts.
+- **'subtract(iterable)'**: Subtracts counts using elements from an iterable or another Counter.
+- **'update(iterable)'**: Adds counts using elements from an iterable or another Counter.
+- **'clear()'**: Resets all counts to zero.
+- **'keys()'**: Returns a view of the dictionary's keys.
+- **'values()'**: Returns a view of the dictionary's values.
+- **'items()'**: Returns a view of the dictionary's items.
+
+---
+
+### **5. 'deque'**
+- **'append(x)'**: Appends an element to the right end of the deque.
+- **'appendleft(x)'**: Appends an element to the left end of the deque.
+- **'pop()'**: Removes and returns an element from the right end of the deque.
+- **'popleft()'**: Removes and returns an element from the left end of the deque.
+- **'extend(iterable)'**: Extends the deque by appending elements from an iterable to the right.
+- **'extendleft(iterable)'**: Extends the deque by appending elements from an iterable to the left.
+- **'rotate(n=1)'**: Rotates the deque 'n' steps to the right (negative 'n' rotates to the left).
+- **'clear()'**: Removes all elements from the deque.
+- **'maxlen'**: Returns the maximum size of the deque, if set.
+
+--- 
+
+Let me know if you need any further details!

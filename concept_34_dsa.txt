@@ -1,0 +1,204 @@
+# Difference between map and filter 
+
+1. Return Type:
+
+	•	Both return an iterator, which can be converted to a list, set, or tuple.
+	•	filter(): Only returns elements that satisfy the condition (True).
+	•	map(): Returns all elements after applying the transformation function.
+
+2. Function Signature:
+
+	•	filter(function, iterable): The function should return True or False for each element.
+	•	map(function, iterable): The function returns a modified version of each element.
+
+3. Use Case:
+
+	•	filter() is used when you want to remove elements that don’t meet a condition.
+	•	map() is used when you want to transform or modify every element in an iterable.
+
+    - e.g filter
+
+    # Filter even numbers from a list
+numbers = [1, 2, 3, 4, 5, 6]
+even_numbers = list(filter(lambda x: x % 2 == 0, numbers))
+
+print(even_numbers)  # Output: [2, 4, 6]
+
+
+    - e.g map 
+
+    # Square each number in a list
+numbers = [1, 2, 3, 4, 5]
+squared_numbers = list(map(lambda x: x**2, numbers))
+
+print(squared_numbers)  # Output: [1, 4, 9, 16, 25]
+
+- Set in python
+
+Sets in Python are a collection of unique elements that are unordered and immutable. In other words, sets can be thought of as a collection of distinct items that cannot be modified once created. 
+
+Sets in python are as follows :
+
+First, that a set cannot contain duplicate elements.
+Second, the elements of a set are immutable(once entered cannot be changed) but the set as a whole is mutable.
+
+Set is an unordered collection of items, where every element is unique and immutable. However, the set itself is mutable.
+
+ There are two ways of creating a set
+
+Putting all the elements inside curly braces “{“ and “}”
+Using set() method.
+
+evenNumber = {2, 4, 6}
+print(evenNumber)
+stringAndNum = {"one", 2, 3}
+print(stringAndNum)
+
+
+set() takes an iterable as an argument. In python, string, lists, and dictionaries are iterable so you can pass them inside set(). set() returns a set or frozenset object. If there is no input then an empty set is returned.
+
+a = {"one": 1, "two": 2}
+b = [100, 200, 300]
+c = 'python'
+print(set(a), end='\n')
+print(set(b), end='\n')
+print(set(c))
+
+- Output:
+
+{'one' , 'two'}
+{200, 100, 300}
+{'h', 'n', 'o', 'p', 'y', 't'}
+
+
+- One important property of set() is that the elements are immutable. So you cannot enter any mutable object inside a set (like dictionaries, lists, set).
+
+# This wont work
+mySetOne = {1, 2, [3, 4]}
+print(mySetOne)
+# This will work
+mySetTwo = {1, 2, (3, 4)}
+print(mySetTwo)
+
+- There are two methods to add elements in a set
+
+add() allows adding single element
+update() allows to add multiple elements
+
+initialSet = {1, 2}
+initialSet.add(3)
+print(initialSet)
+toAdd = [4, 5]   // update() takes an iterable like string, list, dictionary as an argument.
+initialSet.update(toAdd)
+print(initialSet)
+
+- For removing elements we have these methods:
+
+remove(element) - This method removes the element from the set. If the element is not present then it will throw an error.
+
+discard(element) - This method removes the element from the set. If the element is not present then the set will remain unchanged.
+
+clear() - This method is used to delete all the set elements.
+
+mySet = {1, 2, 3, 5}
+print("Before: ", mySet)
+mySet.remove(3)
+print("After: ", mySet)
+mySet.discard(4)
+print("Using discard: ", mySet)
+mySet.clear()
+print(mySet)
+
+- Most operations on set can be performed in two ways.
+
+Using operator
+Using methods
+
+? Union
+
+Union operation combines all the elements from both sets. “|” (pipe) symbol is used to carry out this operation. We can also use the union() method in Python.
+
+budgetCars = {'Maruti', 'Hyundai', 'Ford'}
+highEndCard = {'Audi', 'BMW', 'Ford'}
+print(budgetCars | highEndCard)
+print(budgetCars.union(highEndCard))
+
+Output-
+
+{'Hyundai' , 'Ford' , 'Audi' ,'Maruti' ,'BMW'}
+{'Hyundai' , 'Ford' , 'Audi' ,'Maruti' , 'BMW'}
+
+? Intersection
+
+Intersection operation picks the elements that are common in both sets. “&” operator or intersection() method is used to perform this operation.
+
+chemicalOne = {'Na', 'K', 'Cl'}
+chemicalTwo = {'HCL', 'Cl', 'Ba'}
+print(chemicalOne & chemicalTwo)
+print(chemicalOne.intersection(chemicalTwo))
+
+? Difference
+
+The difference in sets is similar to subtraction. When set B is subtracted from set A i.e, Set A - Set B then we say that in the resulting set all the elements of Set B will be removed from Set A. “-” (subtraction sign) or difference() method is used to perform this operation.
+
+easyToLearn = {'Python', 'JavaScript', 'C++'}
+hardToLearn = {'Assembly', 'C++'}
+print(easyToLearn - hardToLearn)
+print(easyToLearn.difference(hardToLearn))
+print('Changing order we get: ')
+print(hardToLearn - easyToLearn)
+print(hardToLearn.difference(easyToLearn))
+
+? Symmetric Difference
+
+The symmetric difference of two sets A and B is a set that contains elements in either A or B but not both. “^” operator or symmetric_difference() method in python is used to perform this operation.
+
+a = {1, 2, 3}
+b = {3, 4, 5}
+print(a ^ b)
+print(a.symmetric_difference(b))
+
+{1, 2, 4, 5}
+{1, 2, 4, 5}
+
+? Frozen Set
+
+Frozen set is a built-in data type in Python. It is a set that is immutable (once defined, cannot be changed). It supports all non-modifying operations of the set. Operations like add() won’t work in the case of a frozen set.
+
+a = frozenset(['one', 'two', 'three'])
+print(a)
+
+- Output
+frozenset({'one','two','three'})
+
+myDict = {'name': "Python", 'type': 'interpreted'}
+setOfDict = frozenset(myDict)
+print(setOfDict)
+- Ouput:
+frozenset({'name', 'type'})
+
+Suppose that we want to display this data to some user then using the frozenset makes sense as no one will be able to change them.
+
+frozenset can be to store dictionary keys. 
+
+Method	Description
+add()	    Adds an item to the set if it is not already present.
+clear()	    Removes all the elements from the set
+copy()	    Returns a copy of the set.
+difference()	Returns a set containing the difference between two or more sets
+remove(item)	Remove the from the set; it must be a member. If the item is not a member, raise a KeyError.
+discard()	    Removes the specified item from the set.
+difference_update()	Removes the items in this set that are also included in another, specified set.
+intersection()	Returns a set, that is the intersection of two or more sets
+intersection_update()	Removes the items in this set that are not present in other, specified set(s)
+isdisjoint()	        Returns whether two sets have a intersection or not
+issubset()	            Returns whether another set contains this set or not
+issuperset()	        Returns whether this set contains another set or not
+pop()	                Removes an element from the set
+symmetric_difference()	Returns a set with the symmetric differences of two sets
+symmetric_difference_update()	Inserts the symmetric differences from this set and another
+union()	                Return a set containing the union of sets
+update()	            Update the set with another set, or any other iterable
+
+
+

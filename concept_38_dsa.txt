@@ -1,0 +1,143 @@
+Comprehension in python provide a concise and expressive way to create lists, dictionaries, and sets. They allow you to generate these data structures in a single line of code, making your code more readable and efficient.
+
+- Types of Comprehensions in Python
+
+? List comprehensions in Python
+
+new_list = [<expression> for <item> in <iterable> if <condition>]
+
+new_list:   new list being created.
+expression: refers to the expression that would be used to manipulate the elements in the list. It could be a formula or a simple value.
+item:       refers to the original element in the list.
+iterable:   refers to the original sequence being used to create a new_list.
+condition:  It is an optional parameter used to reduce the length of the new_list, making it shorter than the original sequence.
+
+even_list = [x for x in range(0,11,2)]
+odd_list = [x+1 for x in even_list]
+print(even_list)
+print(odd_list)
+
+? Dictionary comprehensions in Python
+
+new_dict = [<key>:<value> for <item> in <iterable> if <condition>]
+
+new_dict:   new dictionary being created.
+key:        The expression for the dictionary key.
+value: T    he expression for the dictionary value.
+item:       The variable representing an element in the original iterable.
+iterable:   The existing sequence you are iterating over.
+condition (optional): An optional filtering condition. The item is included in the new dictionary only if this condition is true.
+
+#1
+word_meaning = [
+   {
+       'word': 'accomplice',
+       'meaning': 'a person who helps another commit a crime.',
+   },
+   {
+       'word': 'brutal',
+       'meaning': 'savagely violent.',
+   },
+   {
+       'word': 'cacophony',
+       'meaning': 'a harsh discordant mixture of sounds.',
+   },
+   {
+       'word': 'Accomplice',
+       'meaning': 'extremely serious or urgent.',
+   },
+]
+print(word_meaning)
+ 
+new_diction = {d['word']:d['meaning'] for d in word_meaning}
+print(new_diction)
+
+#2 
+numbers = [x for x in range(1,13,1)]
+month_of_y = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+print(numbers)
+print(month_of_y)
+year_dict ={key:value for (key, value) in zip(numbers, month_of_y)}
+print(year_dict)
+
+
+-	•	zip() pairs elements from each iterable together based on their position.
+-	•	The resulting iterator produces tuples with elements from the provided iterables.
+
+
+! Set comprehensions in Python
+
+In Python, set comprehensions are used to create a new set from an existing sequence (set) by manipulating its elements.They have a similar syntax to list comprehensions, but they generate sets instead
+
+new_set = [<expression> for <item> in <iterable> if <condition>]
+
+new_set:    new set being created.
+expression: The operation or value to be included in the new set.
+item: The   variable representing an element in the original iterable.
+iterable:   The existing sequence you are iterating over.
+condition (optional): An optional filtering condition. The item is included in the new set only if this condition is true.
+
+#1
+blue_set= {"blue", "blue", "blue", "blue", "blue"}
+print(blue_set)
+red_set = {"red" for set_item in blue_set}
+print(red_set)
+
+? Generator comprehensions in Python
+
+ A generator in Python is a function that returns an iterator that holds a sequence of values instead of a single value. Generators are usually memory efficient as they allocate memory on the generation of items rather than at the beginning.
+
+ new_gen = [<expression> for <item> in <iterable> if <condition>]
+ 
+
+
+new_gen:    new generator being created.
+expression: The operation or value to be included in the new set.
+item:       The variable representing an element in the original iterable.
+iterable:   The existing sequence you are iterating over.
+condition (optional): An optional filtering condition. The item is included in the new set only if this condition is true
+
+even_list = [x for x in range(0,11,2)] // list comprehensions
+print(even_list)
+odd_set = (var+1 for var in even_list)   // generator comprehensions
+for var1 in odd_set:
+  print(var1, end=" ")
+
+- List Comprehension: Creates a list and stores all the elements in memory at once.
+
+- Generator Comprehension: Creates a generator object that produces items one at a time and does not store them in memory, making it more memory-efficient for large data sets.
+
+# List Comprehension
+list_comp = [x * 2 for x in range(5)]
+print(list_comp)  # Output: [0, 2, 4, 6, 8]
+
+# Generator Comprehension
+gen_comp = (x * 2 for x in range(5))
+print(gen_comp)  # Output: <generator object ...>
+
+# To see the values in the generator, you need to iterate over it
+for value in gen_comp:
+    print(value, end=" ")  # Output: 0 2 4 6 8
+
+
+x = [i**+1 for i in range(3)]
+print(x)
+
+Understanding i**+1:
+
+	•	i**+1 is interpreted as i**(1), which means i raised to the power of 1.
+	•	The + sign before 1 is redundant because +1 is just 1.
+
+?    print([if i%2==0: i; else: i+1; for i in range(4)])
+
+    The code you wrote has a syntax error because conditional logic within list comprehensions in Python cannot be structured like an if-else block directly inside the comprehension. 
+
+    [expression_if_true if condition else expression_if_false for item in iterable]
+    print([i if i % 2 == 0 else i + 1 for i in range(4)])
+
+
+
+
+
+
+

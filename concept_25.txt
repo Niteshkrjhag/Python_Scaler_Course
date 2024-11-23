@@ -1,0 +1,126 @@
+# A parameter is a variable inside the parenthesis of a function. In contrast, an argument is a value passed to it.
+
+- Parameters are the variables we specify inside parentheses when defining a function. In the example, num1 and num2 are function parameters.
+
+- Arguments are the values that are passed for these parameters when calling the function\
+
+% Types of Python Function Arguments
+
+-> Python Default Arguments
+-> Python Keyword Arguments
+-> Python Arbitrary Arguments
+-> Python Required Arguments
+
+
+? Python Default Arguments
+
+-> There can be any number of default arguments in a function
+
+-> Whenever you declare a function, the non-default arguments are specified before the default arguments. The default arguments are specified at the end, meaning any arguments specified to the right of a default argument must also be a default one. 
+
+e.g def add(a = 2, b):   // wrong
+e.g def add(b, a=2, c=3): // correct 
+
+? Python Keyword Arguments
+
+-> The term “keyword” is pretty self-explanatory. It can be broken down into two parts— a key and a word (i.e., a value) associated with that key.
+
+def divide_two(a, b):
+    res = a / b
+    return res
+ 
+res = divide_two(12, 3)
+print(res)  # Output: 4
+
+12 and 3 here are known as positional arguments.
+ What if we wanted the interpreter to assume the argument values as a=3 and b=12 in the above-given example? Can we specify argument b before a during the function call?
+
+Here comes the concept of keyword arguments.
+
+# both keyword arguments
+res = divide_two(a=3, b=12)  
+print(res)  # Output: 0.25
+ 
+# one positional, one keyword argument
+res2 = divide_two(36, b=12)       //one must keep in mind that keyword arguments follow positional arguments.
+print(res2)  # Output: 3
+ 
+# Both keyword arguments, the order changed
+res3 = divide_two(b=12, a=48)
+print(res3)  # Output: 4
+
+
+? Python Positional Arguments
+
+->Positional arguments are called according to their position in the function definition. The first argument in the call corresponds to the first parameter in the function's definition, the second to the second parameter, and so on.
+
+->They provide a straightforward way to pass values to a function without remembering the parameters' names.
+
+? Variable-length Arguments (Arbitrary Arguments)
+
+-> at the time of function declaration, the programmer might need to be more specific about the number of arguments to be passed to the function to run it.
+->There are two ways to pass variable-length arguments to a python function.
+# Arbitrary Positional Arguments (*args)
+#  Arbitrary Keyword Arguments (**kwargs)
+
+#Arbitrary Positional Arguments (*args)
+->The first method is by using the single-asterisk (*) symbol. The single asterisk is used to pass a variable number of non-keyworded arguments to the function. At the time of function declaration, if we use a single-asterisk parameter (e.g., *names), all the non-keyword arguments passed during the function call are collected into a single tuple before being passed to the function. 
+
+% -> def print_animals(*animals):
+    for animal in animals:
+        print(animal)
+ 
+    print_animals("Lion", "Elephant", "Wolf", "Gorilla")
+
+
+# Arbitrary Keyword Arguments (**kwargs)
+==>At the time of function declaration, using a double-asterisk parameter (e.g., **address) results in collecting all the keyword arguments in Python, passed to the function at the time of function call into a single Python dictionary before being passed to the function as input. 
+
+-> def print_food(**foods):
+    for food in foods.items():
+        print(food)
+ 
+print_food(Lion="Carnivore", Elephant="Herbivore", Gorilla="Omnivore")
+
+-> Output : 
+
+
+--> next example:
+def print_animal_details(*animals, **foods):
+    for animal in animals:
+        print(animal)
+    for food in foods.items():
+        print(food)
+ 
+print_animal_details("Lion", "Elephant", "Wolf", "Gorilla", 
+                    Lion="Carnivore", Elephant="Herbivore", Gorilla="Omnivore")
+
+
+? Important Points to Remember about Function Argument
+% 1. Necessity of Positional Arguments Before Default Arguments
+    -> arguments with default values (default arguments) must be defined after all the positional arguments without default values. This ensures the interpreter correctly assigns values to arguments when the function is called. 
+    -> 
+    def greet(name, message="Hello"):
+    print(f"{message}, {name}")
+    greet("Alice")
+    greet("Bob", "Good morning")
+
+% 2. Positional Arguments Precede Keyword Arguments
+
+
+
+% 3. Unique Assignment for Each Argument 
+
+    When calling a function, ensure that no argument receives a value more than once.
+    
+    def display_values(a, b):
+    print(f"a: {a}, b: {b}")
+display_values(1, b=2)  # Correct
+# display_values(1, a=3)  # Incorrect, raises an error
+
+
+
+
+
+
+

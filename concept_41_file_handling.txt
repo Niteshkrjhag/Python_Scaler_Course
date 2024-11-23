@@ -1,0 +1,1082 @@
+# Opening and Closing a File in Python
+
+- open() Function:
+
+open(filename, mode)
+
+? The file and python script should be in the same directory. Else, you need to provide the full path of the file.
+? By default, the access mode is read mode if you don't specify any mode.
+
+Serial No.	    Modes	                            Description
+1.	              r	                 Opens a file in read-only mode. The pointer of the file is at the beginning of the file. This is also the default mode.
+
+2.	              rb	             Same as r mode, except this opens the file in binary mode.
+
+3.	              r+	             Opens the file for reading and writing. The pointer is at the beginning of the file.
+4.	              rb+	             Same as r+ mode, except this, opens the file in binary mode.
+
+5.	               w	             Opens the file for writing. Overwrites the existing file and if the file is not present, then creates a new one.
+
+6.	               wb	             Same as w mode, except this opens the file in binary format.
+
+7.	               w+	             Opens the file for both reading and writing, rest is the same as w mode.
+
+8.	               wb+	             Same as w+ except this opens the file in binary format.
+
+9.	               a	             Opens the file for appending. If the file is present, then the pointer is at the end of the file, else it creates a new file for writing.
+
+10.	               ab	             Same as a mode, except this opens the file in binary format.
+
+11.	               a+	             Opens the file for appending and reading. The file pointer is at the end of the file if the file exists, else it creates a new file for reading and writing.
+
+12.	                ab+	             Same as a+ mode, except this, opens the file in binary format.
+
+# When the file is in the same folder where the python script is present. Also access mode is 'r' which is read mode.
+file = open('test.txt',mode='r')
+
+# When the file is not in the same folder where the python script is present. In this case, the whole path of the file should be written.
+file = open('D:/data/test.txt',mode='r')
+
+
+- close() function:
+
+file_name.close()
+
+You can use the 'with' statement with open also, as it provides better exception handling and simplifies it by providing some cleanup tasks. 
+
+? Example using with statement
+
+with open("test.txt", mode='r') as f:
+   # perform file operations
+
+The method shown in the above section is not entirely safe. If some exception occurs while opening the file, then the code will exit without closing the file. A safer way is to use a try-finally block while opening files.
+
+try:
+    file = open('test.txt',mode='r')
+    # Perform file handling operations
+finally:
+    file.close()
+
+
+# Opening file in read mode and printing the contents of the file.
+with open("test.txt", mode='r') as f:
+    data = f.readlines() #This reads all the lines from the file in a list.
+    print(data) #This will print the content of the Hello World file!
+
+# Opening a file in write mode.
+with open("test.txt", mode='w') as f:
+    f.write("Data after write operation")
+# Opening file in read mode to check the contents.
+with open("test.txt", mode='r') as f:
+    data = f.readlines() # this reads all the lines from the file in a list.
+    print(data) #this will print the overwritten content of the file that is       "Data after write operation"
+
+# Opening a file in append mode and appending data to the file.
+with open("test.txt", "a") as f:
+    f.write(" Appending new data to the file")
+# Opening file in read mode to check the contents.
+with open("test.txt", mode='r') as f:
+    data = f.readlines() #This reads all the lines from the file in a list.
+    print(data) #this will print the existing content of file plus the appended content
+
+
+
+-  We use a contiguous set of bytes called a file to store any data.
+
+types of files that Python can handle
+
+Text files
+Binary files
+
+Python can handle other files, including CSV files, excel sheets, etc. 
+
+In the text file, each line is terminated using a newline character \n. In contrast, a binary file does not have any such terminator, and the file's data can be stored after converting the binary file into binary language that the machine can understand.
+
+- File Access Modes
+
+Typically, there are six access modes:
+
+? Read-only (‘r'): 
+Denoted by r. This serves as the default mode for file opening. If the file you wish to access does not exist, it raises an I/O error. With this access mode, you can only read a particular file.
+
+? Write only (‘w'):
+ This is the access mode you use to write in a file you'd like to open. Note that in this mode, if your file already exists, then whatever you wish to write into your file will get written but will delete all the initial contents of the file. When a file does not exist, a new file will be created.
+
+? Append (‘a'):
+ The append access mode allows you to write to opened files. Then what's the difference between the append and write mode? Well, in the append mode, the initial contents of the file are not deleted. Whatever you wish to write in the file will be written after the initial contents of the file.
+
+? Read and Write (‘r+'):
+ This option enables both reading from and writing to a file, with the handle starting at the file's beginning. An error is triggered if the file doesn't exist.
+
+? Write and Read (‘w+'):
+ You might be wondering the difference between read and write mode and this mode. Since this mode is an extension of the write mode, whatever you write into the file will be written after the truncation of existing contents.
+
+? Append and Read (‘a+'):
+ As the name suggests, you can read and append to a file in this access mode. Any data you wish to add will be added after the existing data.
+
+ # Opening a File
+
+ file_object = open(r"file_name", "access_mode")
+
+ The 'r' before the file parameters is used to treat the string as raw, preventing special characters in the file name from causing errors. 
+
+It's essential to close files after opening them. Additionally, specifying the encoding is recommended when dealing with text files, like:
+
+file1 = open("example.txt", "a+", encoding="utf-8")
+
+# Reading from a File
+
+To read data from a text file in Python, you have three possible methods:
+
+- 1. read() Method
+
+The read() function only allows you to either read the file's entire contents or a certain number of specified characters.
+
+? reads all content of the file 
+
+file_obj = open("example.txt", "r", encoding="utf-8")
+print(file_obj.read())
+file_obj.close()
+
+- What if you wanted to read five characters but not from the current position?
+
+file_obj.tell()  # will give you current cursor position
+file_obj.seek(n)  # will seek the nth position
+
+
+- Newline Character: { Pressing Enter in a text file adds a \n automatically at the end of the line. } 
+- readline() Behavior: Reads the line, including the \n.
+- print() Adds Newline: Appends an extra newline by default, causing blank lines if \n exists.
+- Avoid Blank Lines: Use .rstrip() to remove the trailing \n.
+- Debugging Tip: Use repr() to see hidden characters like \n.
+
+#  Imp Concept 
+
+file_obj = open("text.txt", "r", encoding="utf-8")
+print(file_obj.readline())
+print(file_obj.readline())
+file_obj.close()
+
+text.txt file contains following content
+
+Hello World 
+I've learnt how to use the readline() function
+
+Ouput:
+
+Hello World 
+
+I've learnt how to use the readline() function
+
+# To solve this use 
+
+file_obj = open("text.txt", "r", encoding="utf-8")
+print(file_obj.readline().rstrip())  # Removes the newline at the end
+print(file_obj.readline().rstrip())
+file_obj.close()
+
+Output:
+Hello World
+I've learnt how to use the readline() function
+
+# To see actual content 
+file_obj = open("text.txt", "r", encoding="utf-8")
+line1 = file_obj.readline()
+line2 = file_obj.readline()
+file_obj.close()
+
+print(repr(line1))  # Shows the exact string including \n
+print(repr(line2))
+
+Output:
+'Hello World\n'
+"I've learnt how to use the readline() function"
+
+
+#Visualization of Cursor Positions
+
+File Content with Byte Positions:
+H e l l o   W o r l d \n I ' v e   l e a r n t   h o w ...
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 ...
+- Cursor Movement During Execution:
+? Position 0: Cursor starts at the beginning ('H').
+? Position 12: After reading "Hello World\n", the cursor moves past \n to point at 'I'.
+? Position 55: After reading the second line, the cursor moves to the end of the file.
+
+# 3. readlines() Method
+
+the readlines() method reads all the lines in the file and returns them properly separated in a list.
+
+file_obj = open("example.txt", "r", encoding="utf-8")
+print(file_obj.readlines())
+file_obj.close()
+
+? Better Approach is to iterate each line using loop as it is more faster and memory efficient
+
+file_obj = open("example.txt", "r")
+for line in file_obj:
+print(line)
+file_obj.close()
+
+
+? Writing Modes
+
+file_object = open(r"file_name", "access_mode")
+
+The 'r' is just before the parameters to prevent the characters in the file name from being treated as special characters. For example, if we have "\tapes" in the file address, then "\t" could be treated as the tab character, and an error would be raised. The 'r' represents raw, meaning the string does not contain special characters.
+
+Even if the text file does not exist, we can use the w or the a access mode to create a text file and then write to it.
+
+file_obj.write("This is how you write to a file") // after first write statement other statements will behave as append mode operation only first statement will override if file exists.
+file_obj.write("Now this will be written to another line")
+
+
+{"output": "This is how you write to a file /n
+ Now this will be written to another line "}
+print(file_obj.read())
+file_obj.close()
+
+# . The writelines() Function in Python
+
+Constantly using file.write() for every line we want to write to your file can get tricky. Hence, we can use the writelines() function.
+
+lines = ["line1", "line2", "line3"]
+file_obj.writelines(lines)
+
+- Writing to a Binary File
+
+f = open("binfile.bin", "wb")
+nums = [1, 2, 3, 4, 5]
+arr = bytearray(nums)
+f.write(arr)
+f.close()
+
+
+Human-readable data does not exist in binary form. Consequently, when dealing with an array of numbers such as 1, 2, 3, 4, and 5, it is necessary to transform them into a byte representation before storing them in a binary file. To achieve this, the bytearray() function is employed.
+
+# append mode
+
+file = open("writing.txt", "a")
+file.write("This way, I will preserve the existing contents in the file")
+file.close()
+
+- Writing to a File in Python Using for Statement
+
+items_to_write = ["Item 1", "Item 2", "Item 3", "Item 4"]
+file = open("output.txt", "w")
+
+for item in items_to_write:
+    file.write(item + "\n")
+
+file.close()
+
+- This method is not limited to lists. It can be adapted for various iterable objects.
+
+
+# Delete a file in python
+
+We can use the os.remove() method in Python to remove files and the os.rmdir() method to delete an empty folder. We can use the shutil.rmtree() method to delete a folder and all its files.
+
+ Now to remove a file, you have three methods. Using one of the modules:
+
+os Module
+shutil Module
+pathlib Module
+
+- os Module
+The os module allows you to use the operating system-dependent functionalities.
+
+To use the os module to delete a file, we import it, then use the remove() function provided by the module to delete the file. It takes the file path as a parameter.
+
+You can not just delete a file but also a directory using the os module.
+? To delete a file 
+
+import os
+file_path = <file_path>
+if os.path.isfile(file_path):
+  os.remove(file_path)
+  print("File has been deleted")
+else:
+  print("File does not exist")
+
+
+
+On the other hand, if you wish to delete or clear a directory, you can do it with the help of the rmdir() function of the os module. Note that the directory must be empty for this to work
+
+import os
+os.rmdir('directory')
+
+- 2. Using shutil Module
+
+The shutil module provides high-level file operations like copying and removing files or directories. Unlike the os module, shutil.rmtree() can delete non-empty directories, including all their contents (files and subdirectories).
+
+import shutil
+shutil.rmtree('path')
+
+You cannot delete a single file with the shutil.rmtree() function.
+
+- 3. Using pathlib Module
+
+he pathlib module (Python 3.4+) offers file and directory operations similar to os. Use unlink() to delete files or symbolic links, and rmdir() for empty directories. 
+
+? to remove files or symbolic link
+import pathlib
+file = pathlib.Path("test/file.txt")
+file.unlink()
+
+? to remove directory
+
+import pathlib
+directory = pathlib.Path("files/")  // Path objects adapt to your OS (WindowsPath or PosixPath).
+directory.rmdir()
+
+# Summary
+
+Deleting a single file?	                        Os	                  os.remove()
+                                              Pathlib	           path_object.unlink()
+
+Deleting Empty Directories?	                    Os	                 rmdir() // same for both
+                                              Pathlib
+
+Deleting non-empty Directories?	               Shutil	                 rmtree()
+
+
+
+# With Statement 
+
+The with statement in Python can be used with custom objects by implementing the context management protocol, which requires two methods: __enter__() and __exit__().
+
+- __enter__(): Runs when entering the context, setting up necessary actions (e.g., opening a file, connecting to a database).
+- __exit__(): Runs when exiting the context, handling cleanup actions (e.g., closing a file, disconnecting from a database).
+
+ Example:
+python
+class MyContextManager:
+    def __enter__(self):
+        print("Entered the context")
+        return "Entered!"
+    
+    def __exit__(self, *args, kwargs):
+        print("Leaving the context")
+
+with MyContextManager() as hello:
+    print(hello)
+
+
+ Output:
+
+Entered the context
+Entered!
+Leaving the context
+
+
+- __exit__() accepts three arguments:
+  - execution_type: Exception class (if any).
+  - execution_value: Exception instance (if any).
+  - traceback: Traceback object (if any).
+
+When no exceptions occur, execution_type, execution_value, and traceback are all None.
+
+# Using "With" Statement to close a file
+
+the file is automatically closed by Python, regardless of whether the operations were successful or an exception occurred when we open a file using with statement 
+
+# The Contextlib Library
+
+contextlib library has a “contextmanager” decorator, providing an alternative and simple way to implement context management protocol. This reduces a lot of boilerplate code as it automatically provides __enter()__ and __exit()__ methods.
+
+from contextlib import contextmanager
+ 
+ 
+@contextmanager
+def myContextManager():
+    print("Entering...")
+    yield "Hello There"
+    print("Exiting...")
+ 
+ 
+with myContextManager() as cm:
+    print(cm)
+
+Output:
+Entering...
+Hello There
+Exiting...
+
+The decorator “@contextmanager” allows us to create a function-based context manager. so need to use 'class'
+
+There are two parts to the function. The code before yield behaves like __enter()__ and the code after yield behaves like __exit()__.
+
+Yield is a keyword used like return, except the function where it is used will return a generator.
+
+An object represents an entity with its identity and behavior in the real world. It is an instance of a class, which defines its properties (attributes) and methods (behaviors).
+
+# VVVI Concept :
+
+class Scaler:
+    def __init__(self):
+        print("first")
+        self.__name='Python'
+    def setCourseName(self, name):
+        print("fourth")
+        print('"setCourseName()" is called here')
+        self.__name=name
+    def getCourseName(self):
+        print("third")
+        print('"getCourseName()" is called here')
+        return self.__name
+    print("second")
+    name=property(getCourseName, setCourseName)
+    print("second")
+obj = Scaler()
+obj.name = "C++"
+print(obj.name)
+
+
+? Output
+
+second
+second
+first
+fourth
+"setCourseName()" is called here
+third
+"getCourseName()" is called here
+C++
+
+- Explanation
+
+Here's a concise explanation of the output:
+
+1. Class Definition:  
+    - class scalar -> class defination 
+   - print("second") runs when the class is defined, before instantiation.
+   - The class body is executed once when the class is defined, before any instance is created.
+   - When the Scaler class is defined, Python reads through the entire class body and executes all top-level statements once during the class creation.
+
+2. Object Instantiation: 
+   - obj = Scaler() 
+   - __init__() method runs, printing "first" and setting self.__name = 'Python'.
+   -  obj is the object created from the Scaler class, and Python calls the __init__ method to initialize the object.
+
+
+3. Setting Property:  
+   - obj.name = "C++" triggers setCourseName(), printing "fourth" and updating self.__name.
+
+4. Getting Property:  
+   - print(obj.name) triggers getCourseName(), printing "third" and returning "C++".
+
+
+
+# The syntax of creating an object of a particular class is as follows:
+[object_name] = [class_name](arguments/parameters)
+
+# Creating a class named Scaler
+class Scaler:
+  def __init__(self, name, age, hobby):
+    self.name = name
+    self.age = age
+    self.hobby= hobby
+
+  def new(self):
+    print("Heyy my name is " + self.name + ". I Love " + self.hobby)
+
+obj2 = Scaler("Vikram", 24, "coding")
+obj2.new()
+
+
+Note:.
+
+a. The init method is called each and every time a new object is being created from any class. The init method is similar to the constructors as in other programming languages(C++, Java). Such a method contains statements that would be executed during the run time(time of object creation). This method begins with a double underscore(__).
+
+b. Also, the first argument which is passed in the function of the class must be the object itself. So it's conventionally called “self”, passed as the first argument, followed by the subsequent arguments (such as age, hobby, etc.). The “self” refers to the current instance of the class. We can call this parameter by any name other than “self” if we want.
+
+# Modifying object's properties(attributes)
+
+# Creating a class named Scaler
+class Scaler:
+  a = 10
+
+# Declaring an object
+obj1 = Scaler()
+print(obj1.a)
+
+#Modifying value
+obj1.a = 200
+print("After modifying the object properties")
+print(obj1.a) 
+
+# Deleting Object's properties in Python
+
+del obj1.a
+
+# Deleting an Object in Python
+del obj1
+
+Note: After deleting the object of a class, the name of the object which is bound to it gets deleted, but however the object continues to exist in the memory with no name assigned to it. Later it is automatically destroyed by a process known as garbage collection.
+
+Q. How are objects created in Python?
+
+A: Objects are created by calling the constructor of a class. In Python, the constructor method is called __init__(), and it is automatically invoked when an object is created using the class name followed by parentheses. The __init__() method initializes the object's attributes and sets its initial state.
+
+Q. What is the significance of the self parameter in Python object methods?
+
+A: The self parameter is a convention in Python object methods that refers to the instance of the object itself. It allows the object in Python to access its own attributes and methods.
+
+# we define a class using the keyword class <name_of_class>:
+ 
+class house:       
+    height = "572ft"                 # predefined attributes of a class
+    architect = "Tony"
+  
+    def display_height(self):
+        print("This house is " + self.height)  # methods for displaying height
+    def display_architect(self):
+        print ("The architect is " + self.architect) # methods for displaying architect
+        
+        
+# Driver Code
+Bungalow = house()                   # object creation
+ 
+print(Bungalow.height)                   # accessing class attributes
+ 
+Bungalow.display_height()                # calling method through object
+ 
+Bungalow.display_architect()             # calling method through object
+# python 3 syntax
+
+#Inheritance 
+
+Inheritance is the ability to ‘inherit' features or attributes from already written classes into newer classes we make.
+
+It promotes code reusability, which is considered one of the best industrial coding practices as it makes the codebase modular.
+
+ The existing classes are the parent/base classes from which the attributes and methods are inherited in the child classes.
+
+Syntax:
+
+ class DerivedClass(BaseClass):
+    # Class definition
+
+? Example
+
+class Person:
+    def __init__(self, name, age):  # Constructor to initialize name and age attributes
+        self.name = name
+        self.age = age
+
+    def say_hello(self):  # Method to greet and introduce the person
+        print(f"Hello, my name is {self.name} and I am {self.age} years old.")
+
+class Student(Person):  # Student class inherits from Person class
+    def __init__(self, name, age, grade):  # Constructor to initialize name, age, and grade attributes
+        super().__init__(name, age)  # Call the parent class constructor to initialize name and age
+        self.grade = grade  # Additional attribute specific to the Student class
+
+    def say_hello(self):  # Override the say_hello method of the parent class
+        super().say_hello()  # Call the parent class say_hello method to introduce the student as a person
+        print(f"I am a student in grade {self.grade}.")  # Print additional information specific to the Student class
+
+# Creating an instance of the base class
+person = Person("John", 30)
+person.say_hello()
+
+# Creating an instance of the derived class
+student = Student("Mary", 18, 12)
+student.say_hello() 
+
+- Types of Inheritance in Python
+
+? Single Inheritance
+
+Single Inheritance is the simplest form of inheritance where a single child class is derived from a single parent class.
+
+# python 3 syntax
+# single inheritance example
+ 
+class parent:                  # parent class
+    def func1(self):
+        print("Hello Parent")
+ 
+class child(parent):    
+  # child class
+    def func2(self):                  # we include the parent class
+        print("Hello Child")          # as an argument in the child class
+ 
+# Driver Code
+test = child()                 # object created
+test.func1()                   # parent method called via child object
+test.func2()                   # child method called
+
+? Multiple Inheritance in Python
+
+In multiple inheritance, a single child class is inherited from two or more parent classes.
+
+# python 3 syntax
+# multiple inheritance example
+ 
+class parent1:                     # first parent class
+    def func1(self):                   
+        print("Hello Parent1")
+ 
+class parent2:                     # second parent class
+    def func2(self):                   
+        print("Hello Parent2")
+ 
+class parent3:                     # third parent class
+    def func2(self):                     # the function name is same as parent2
+        print("Hello Parent3")
+ 
+class child(parent1, parent2, parent3):     # child class
+    def func3(self):                     # we include the parent classes
+        print("Hello Child")       # as an argument comma separated
+                           
+# Driver Code
+test = child()        # object created
+test.func1()          # parent1 method called via child
+test.func2()          # parent2 method called via child instead of parent3
+test.func3()          # child method called
+ 
+# to find the order of classes visited by the child class, we use __mro__ on the child class
+print(child.__mro__)
+
+As we can see with the help of mro, the child class first visits itself, then the first parent class, referenced before the second parent class. Similarly, it visits the second parent class before the third parent class, and that's why it performs the second parent's function rather than the third parent's. Finally, it visits any objects that may have been created.
+
+? Multilevel Inheritance in Python
+
+In multilevel inheritance, we go beyond just a parent-child relation. We introduce grandchildren, great-grandchildren, grandparents, etc. 
+
+class grandparent:                 # first level
+    def func1(self):                   
+        print("Hello Grandparent")
+ 
+class parent(grandparent):         # second level
+    def func2(self):                   
+        print("Hello Parent")
+ 
+class child(parent):               # third level
+    def func3(self):                   
+        print("Hello Child")   
+                               
+ 
+# Driver Code
+test = child()                     # object created
+test.func1()                       # 3rd level calls 1st level
+test.func2()                       # 3rd level calls 2nd level
+test.func3()                       # 3rd level calls 3rd level
+
+
+# Hierarchical Inheritance in Python
+
+Hierarchical Inheritance is the right opposite of multiple inheritance. It means that there are multiple derived child classes from a single-parent class.
+
+# python 3 syntax
+# hierarchical inheritance example
+ 
+class parent:                       # parent class
+    def func1(self):                   
+        print("Hello Parent")
+ 
+class child1(parent):               # first child class
+    def func2(self):                   
+        print("Hello Child1")
+ 
+ 
+class child2(parent):               # second child class
+    def func3(self):                   
+        print("Hello Child2")   
+                               
+ 
+# Driver Code
+test1 = child1()                     # objects created
+test2 = child2() 
+ 
+test1.func1()                       # child1 calling parent method
+test1.func2()                       # child1 calling its own method
+ 
+test2.func1()                       # child2 calling parent method
+test2.func3()                       # child2 calling its own method
+
+? Hybrid Inheritance in Python
+
+Hybrid Inheritance is the mixture of two or more different types of inheritance.
+
+# python 3 syntax
+# hybrid inheritance example
+ 
+class parent1:                            # first parent class
+    def func1(self):                   
+        print("Hello Parent1")
+ 
+ 
+class parent2:                            # second parent class
+    def func2(self):                   
+        print("Hello Parent2")
+ 
+class child1(parent1):                    # first child class
+    def func3(self):                   
+        print("Hello Child1")
+ 
+ 
+class child2(child1, parent2):            # second child class
+    def func4(self):                   
+        print("Hello Child2")   
+                               
+ 
+# Driver Code
+test1 = child1()                          # object created
+test2 = child2()
+ 
+test1.func1()                       # child1 calling parent1 method
+test1.func3()                       # child1 calling its own method
+ 
+test2.func1()                       # child2 calling parent1 method
+test2.func2()                       # child2 calling parent2 method
+test2.func3()                       # child2 calling child1 method
+test2.func4()                       # child2 calling its own method
+
+ 
+combination of three types of python inheritance.
+
+Parent1 -> Child1 : Single Inheritance
+
+Parent1 -> Child1 -> Child2 : Multi - Level Inheritance
+
+Parent1 -> Child2 <- Parent2 : Multiple Inheritance
+
+
+
+ Example of Method Overriding in Python
+
+python
+class Animal:  # Parent class
+    def sound(self):
+        print("Animals make sounds")
+
+class Dog(Animal):  # Child class
+    def sound(self):  # Overriding the parent method
+        print("Dogs bark")
+
+# Object creation
+generic_animal = Animal()
+pet_dog = Dog()
+
+# Method calls
+generic_animal.sound()  # Calls parent method
+pet_dog.sound()         # Calls child method (overridden)
+
+# Output:
+# Animals make sounds
+# Dogs bark
+
+
+ Explanation:
+- Parent Class (Animal): Defines a sound() method.
+- Child Class (Dog): Overrides the sound() method to provide specific behavior.
+- When the method is called on a Dog object, the child's implementation is executed.
+
+
+To remove overriding and access the parent class method from the child class, you can explicitly call the parent class's method within the child class. This ensures the parent class's implementation is used.
+
+ Example: Avoiding Overriding
+
+python
+class Animal:  # Parent class
+    def sound(self):
+        print("Animals make sounds")
+
+class Dog(Animal):  # Child class
+    def sound(self):
+        # Call the parent class method explicitly
+        Animal.sound(self)
+        print("Dogs bark")  # Additional behavior
+
+# Object creation
+pet_dog = Dog()
+pet_dog.sound()
+
+# Output:
+# Animals make sounds
+# Dogs bark
+
+
+ Explanation:
+1. In the Dog class's sound() method, the parent class's sound() method is explicitly called using Animal.sound(self).
+2. This approach allows the parent method to execute first, followed by any additional behavior defined in the child class.
+
+Alternatively, you can also use super() to call the parent method dynamically:
+
+python
+class Dog(Animal):
+    def sound(self):
+        super().sound()  # Calls parent method
+        print("Dogs bark")
+
+# python 3 syntax
+# solution to method overriding - 1
+ 
+class parent:                       # parent class
+ 
+    def __init__(self):             # __init__() of parent
+        self.attr1 = 50
+        self.attr2 = 66
+ 
+class child(parent):                # child class
+ 
+    def __init__(self):             # __init__() of child
+        parent.__init__(self)       # calling parent’s __init__()
+        self.attr3 = 45
+ 
+test = child()                      # object initiated
+ 
+print (test.attr1)                  # parent attribute called via child
+
+
+# super() Function:
+
+Used to call methods of a parent class in a child class.
+Avoids hardcoding the parent class name.
+
+class Parent:
+    def display(self):
+        print("Hello Parent")
+
+class Child(Parent):
+    def display(self):
+        super().display()  # Calls Parent's display()
+        print("Hello Child")
+
+obj = Child()
+obj.display()
+# Output:
+# Hello Parent
+# Hello Child
+
+# python 3 syntax
+# solution to method overriding - 2
+ 
+class parent:                     # parent class
+ 
+    def display(self):            # display() of parent
+        print("Hello Parent")
+ 
+class child(parent):              # child class
+ 
+    def display(self):            # display() of child
+        super().display()         # referencing parent via super()
+        print("Hello Child")
+ 
+test = child()                    # object initiated
+ 
+test.display()                    # display of both activated
+
+Alternately we can also call super() with the following syntax:
+
+super(child,self).display()
+
+# issubclass() Function:
+
+Checks if a class is a subclass of another.
+Returns True if a parent-child relationship exists, else False.
+
+# isinstance() Function:
+Checks if an object is an instance of a class or its subclasses.
+
+# python 3 syntax
+# issubclass() and isinstance() example
+ 
+class parent:                     # parent class
+    def func1():                   
+        print("Hello Parent")
+ 
+class child(parent):              # child class
+    def func2():                 
+        print("Hello Child")  
+                                
+ 
+# Driver Code
+ 
+print(issubclass(child,parent))          # checks if child is subclass of parent
+ 
+print(issubclass(parent,child))          # checks if parent is subclass of child
+ 
+A = child()                        # objects initialized
+B = parent()
+ 
+print(isinstance(A,child))                # checks if A is instance of child
+print(isinstance(A,parent))               # checks if A is instance of parent
+print(isinstance(B,child))                # checks if B is instance of child
+print(isinstance(B,parent))            # checks if B is instance of parent
+
+#  Disadvantages of Inheritance in Python
+
+Slower Execution: Loading interdependent classes reduces performance.
+Tight Coupling: Child classes depend on parent classes, limiting independent execution
+
+- VVVVViiiii Concept
+
+
+class A:
+   def one(self):
+       return self.two()
+   def two(self):
+       return 'A'
+class B(A):
+   def two(self):
+       return 'B'
+obj= B()
+print(obj.one())
+
+? Q) Print the Output of the above code
+
+#Explanation :
+
+Here’s the step-by-step execution of the program:
+
+1. Class Definition  
+   - Class A:
+     - Method one() calls self.two().
+     - Method two() returns 'A'.
+   - Class B (inherits from A):
+     - Overrides the two() method to return 'B'.
+
+2. Object Creation  
+   - obj = B() creates an instance of class B.
+
+3. Calling obj.one()  
+   - Execution starts with the one() method in class A (since B does not override it).  
+
+4. Inside one()  
+   - The call self.two() is made. Here, self refers to the object obj of class B.  
+
+5. Calling two()  
+   - Since B overrides the two() method, the overridden version in B is executed, returning 'B'.  
+
+6. Returning Value  
+   - The value 'B' is returned by the one() method and printed.  
+
+Output:  
+
+B
+  
+
+Key Concept:  
+- The self in a method call always refers to the object, not the class, ensuring that overridden methods are called even when defined in the parent class.
+
+class A:
+    pass
+
+class B(A):
+    pass
+
+class C(A):
+    pass
+
+class D(B, C):
+    pass
+
+print(D.mro())
+
+Output:
+
+[<class '__main__.D'>, <class '__main__.B'>, <class '__main__.C'>, <class '__main__.A'>, <class 'object'>]
+
+
+# MRO (Method Resolution Order): Defines the order Python follows to search for a method or attribute in a class hierarchy, especially in multiple inheritance, using the C3 Linearization Algorithm.
+
+Order: Class → Parents (left to right) → Stops at the first match.
+View MRO: Use .mro() or help() on a class.
+Ensures consistent method lookup and resolves ambiguity in multiple inheritance.
+
+
+# Very Very Nice Concept
+
+class A:
+    def display(self):
+        print("Display from A")
+
+class B(A):
+    def display(self):
+        super().display()  # Calls display() from A
+        print("Display from B")
+
+class C(A):
+    def display(self):
+        super().display()  # Calls display() from A
+        print("Display from C")
+
+class D(B, C):
+    def display(self):
+        super().display()  # Calls display() from the next in MRO
+        print("Display from D")
+
+# Create an object of D
+obj = D()
+obj.display()
+
+% Detailed Solution
+
+    Let's break down the execution step by step to understand how the Method Resolution Order (MRO) works in this example.
+
+ Code Execution:
+
+1. Class Definitions:
+   - A, B, C, and D are defined with display() methods.
+   - super() calls the next method in the MRO chain.
+
+2. Object Creation:
+   - obj = D() creates an object of class D.
+
+3. Call to obj.display():
+   - D.display() is invoked.
+
+ MRO for Class D:
+To resolve methods, Python follows the C3 Linearization Algorithm to compute the MRO. For D, the MRO is:
+
+D → B → C → A → object
+
+The MRO means Python will look for methods in this sequence.
+
+ Step-by-Step Execution:
+1. D.display() is called:
+   - super().display() in D refers to the next class in the MRO, which is B.
+
+2. B.display() is executed:
+   - super().display() in B refers to the next class in the MRO, which is C.
+   - Prints "Display from B" after calling C.display().
+
+3. C.display() is executed:
+   - super().display() in C refers to the next class in the MRO, which is A.
+   - Prints "Display from C" after calling A.display().
+
+4. A.display() is executed:
+   - Prints "Display from A".
+
+5. Returning Back:
+   - Execution returns in reverse order: A → C → B → D.
+   - Each method completes its remaining print statement.
+
+ Final Output:
+
+Display from A
+Display from C
+Display from B
+Display from D
+
+
+ Key Points:
+- super() doesn't directly refer to the parent class but follows the MRO sequence.
+- In multiple inheritance, MRO ensures consistent and predictable method lookup.
+
+
+
+
+
+
+
+
+
+
+
+
+

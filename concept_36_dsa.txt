@@ -1,0 +1,169 @@
+? Tuple 
+
+Tuples in python is one of the four inbuilt data types used to store collections in Python. Unlike other data types, the elements in tuples are ordered and immutable.
+
+- Creating a Tuple in Python
+
+tempTuple = ('apple', 'mango', 'banana')
+print(tempTuple)
+
+tempTuple = 'apple', 'mango', 'banana'  // another way to create tuple but not a good practice
+print(tempTuple)
+
+? Tuples in Python are similar to lists but with a key difference: they are immutable. This means once a tuple is created, its elements cannot be changed, added, or removed. 
+
+Immutable Nature: Once a tuple is created, its elements cannot be modified. This ensures data integrity and stability.
+
+Ordered Collection: Like lists, tuples maintain the order of elements as they are inserted.
+
+Support for Duplicate Values: Tuples allow duplicate values just like lists.
+
+Accessing Elements: Elements in a tuple can be accessed using their index values. Here's an example illustrating the immutability of tuples in python:
+
+my_tuple = (1, 2, 3)
+
+#Attempting to change an element in the tuple will result in an error
+my_tuple[1] = 1  # This will raise a TypeError
+
+- Python Tuple Types
+
+Python offers two primary types of tuples: named tuples and unnamed tuples.
+
+! Named tuples: created by subclassing the tuple class and assigning a name to the new class, serve well for representing structured data like records, akin to database entries. Each element within a named tuple corresponds to a field in the record, permitting access by name instead of index. For instance:
+
+class MyTuple(tuple):
+    pass
+
+my_tuple = MyTuple(("one", "two", "three"))
+print(my_tuple.one)  
+
+one
+
+! Unnamed Tuples: are more prevalent and are generated simply by separating values with commas. They are suitable for storing unstructured data that doesn't necessitate naming. Here's an example:
+
+my_tuple = (1, 2, 3)
+print(my_tuple) 
+
+a tuple in python containing three elements is created. Accessing elements within the tuple can be achieved using index notation, akin to how one would interact with a list.
+
+? Accessing Elements in a Python Tuple and Indexing
+
+tempTuple = ('hello', 1, 2, 3)
+print(tempTuple[0]) # prints first element of the tuple
+print(tempTuple[3]) # prints last element of the tuple
+print(tempTuple[4]) # error
+
+nestedTuple = ('hello', [1 ,2, 3], (4, 5, 6))
+print(nestedTuple[0][2])
+print(nestedTuple[2][2])
+
+- Accessing Via Negative Indices
+
+Python allows you to access elements of a collection via negative indices. When accessing using a negative index, -1 depicts the last element and -n depicts the first index where n is the length of the index.
+
+tempTuple = ('Welcome', 'to', 'interview', 'bit.', 'Have', 'a', 'great', 'day')
+print(tempTuple[2]) # interview
+print(tempTuple[-6]) # interview
+
+? Updating Tuples in Python
+
+Adding a new element or deleting one is not really an option when dealing with tuples in python, as they are immutable. Even the elements of the tuple cannot be updated until and unless the element is mutable for example a list.
+
+tempTuple = ('Welcome', 'to', 'interview', 'bit.', 'Have', 'a', 'great', 'day', [1, 2, 3])
+# tempTuple[0] = 'Hello' # throws type error, tuple object does not support type assignment.
+tempTuple[8].append(4) # appending a new integer i.e. 4 in a list at 8th index of the tuple ‘tempTuple’
+# Printing the list at 8th index in the tuple
+print(tempTuple[8]) # OUTPUT: [1, 2, 3, 4]
+tempTuple[8].pop(3) # popping element at 3rd index from the list i.e. 8th index of the tuple 'tempTuple'
+# Printing the list at 8th index in the tuple
+print(tempTuple[8]) # OUTPUT: [1, 2, 3]
+tempTuple = (1, 2, 3) # Assigning tuple all over again
+# Printing the tuple
+print(tempTuple) # OUTPUT: (1, 2, 3)
+
+
+# concatenating two different tuples
+print(('apple', 'mango') + (1, 2, 3)) # OUTPUT: (‘apple’, ‘mango’, 1, 2, 3)
+# repeat a tuple 5 times
+print(("apple",) * 5) # OUTPUT: (‘apple’, ‘apple’, ‘apple’, ‘apple’, ‘apple’)
+
+
+
+Function                                                    Description
+cmp(tuple1,tuple2)                                     Compares elements of two different tuples.
+len (tuple)                                            Returns the length of the tuple
+max(tuple)                                             Returns the element with max value from the tuple.
+min (tuple)                                            Returns the element with min value from the tuple.
+tuple(seq)                                             Returns a tuple, by converting a list to a tuple.   Takes a list in the parameter.
+
+
+# Code for creating nested tuples
+tup1 = ('a','b','c')
+tup2 = ('d','e')
+tup3 = (tup1, tup2)
+print(tup3)
+
+#(('a','b','c'), ('d','e'))
+
+tup = ('2',)*3
+tup = tup + tup
+print(tup)
+#output: ('2','2','2')
+
+You are correct that tuples are immutable, meaning that once a tuple is created, its elements cannot be changed. However, what you're doing in the code is not changing the tuple itself but rather creating a new tuple and reassigning it to the variable tup.
+
+Here's a step-by-step explanation of your code:
+
+tup = ('2',) * 3: This creates a tuple ('2', '2', '2'). The * operator repeats the tuple three times.
+tup = tup + tup: This concatenates ('2', '2', '2') with itself, creating a new tuple ('2', '2', '2', '2', '2', '2'), and assigns it to tup.
+Since tuples are immutable, the original tup was not changed. Instead, the + operation created a new tuple and reassigned it to the variable tup. This is why the code is valid and outputs:
+
+- Slice syntax:
+
+tuple[start : stop : step]
+
+start: is the starting index of the string, on which slicing operation has to be performed. It determines from where slicing of the string will ‘begin’.
+
+stop: is the stopping index of the slicing, ‘until’ which slicing operation has to be performed i.e stop index is excluded while generating the sub-tuple.
+
+step: It is an optional argument that defines the steps when iterating the list i.e. it allows us to skip over elements.
+
+temptuple =  ("Welcome", "to", "interview", "bit.", "Have", "a", "great", "day")
+tuple1 = temptuple[::] # fetching complete tuple
+print("tuple1:", tuple1) # OUTPUT: (‘Welcome’, ‘to’, ‘interview’, ‘bit.’, ‘Have’, ‘a’, ‘great’, ‘day’)
+tuple2 = temptuple[0 : 6] # fetching tuple from 0th index to 6th index
+print("tuple2:", tuple2) # OUTPUT: (‘Welcome’, ‘to’, ‘interview’, ‘bit.’, ‘Have’, ‘a’)
+tuple3 = temptuple[:: 3] # jumping every third element from start to end
+print("tuple3:", tuple3) # OUTPUT: (‘Welcome’, ‘bit.’, ‘great’)
+tuple4 = temptuple[1:5:2] # jumping to every 2nd element starting from 1st index until 5th index
+print("tuple4:", tuple4) # OUTPUT: (‘to’, ‘bit.’)
+tuple5 = temptuple[-8:-5] # 8th index from end to 5th index from end
+print("tuple5:", tuple5) # OUTPUT: (‘Welcome’, ‘to’, ‘interview’)
+tuple6 = temptuple[::-3] # jumping every 3rd element in reverse
+print("tuple6:", tuple6) # OUTPUT: (‘day’, ‘Have’, ‘to’)
+tuple7 = temptuple[-7:-3:2] # alternate implementation of tuple4
+print("tuple7:", tuple7) # OUTPUT: (‘to’, ‘bit.’)
+ 
+ You can delete a tuple as a whole, but deleting a specific value/element in a tuple is not possible.
+
+ tempTuple = (1, 2, 3, 4, 5)
+# tempTuple.pop() # throws error as object has no attribute pop
+# del tempTuple[3] # throws error as tuple does not support object deletion
+print(tempTuple) # OUTPUT: (1, 2, 3, 4, 5)
+del tempTuple
+print(tempTuple) # throws NameError: name 'tempTuple' is not defined
+
+- conversion of list to tuple using tuple(list1)
+
+temp = ('a',)
+n = 2
+for i in range(int(n)):
+    temp = (temp,)
+    print(temp)
+
+(('a',),)
+((('a',),),)
+
+
+Tuple being a readonly collection, has a faster iteration. (As they are stored in a single block of memory, and don’t have extra space for storing objects, they have constant set of values)
+

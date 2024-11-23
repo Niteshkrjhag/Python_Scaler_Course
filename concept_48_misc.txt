@@ -1,0 +1,372 @@
+The ternary operator is a way of writing simple if/else statements in a single line.
+
+Syntax of Ternary Operator
+
+Syntax:
+true_value if condition else false_value
+
+You can also implement ternary operators with a tuple, list, dictionary, or lambda functions.
+
+Ternary operators include:
+Condition
+True value
+False value
+
+! Question
+
+a, b = 10, 20
+print(a < b and a or b)
+
+? what is the output of the above program
+
+Key Points:
+Short-circuiting: Both and and or use short-circuit evaluation.
+For and, if the first condition is False, the second condition is not evaluated.
+For or, if the first condition is True, the second condition is not evaluated.
+This expression is a concise way to implement conditional logic where a is returned if a < b is True; otherwise, b is returned.
+
+
+### Ternary Operator in Python: A Concise Guide
+
+#### **Definition**
+The ternary operator (or conditional expression) is a way to write simple `if/else` statements in one line. It evaluates a condition and returns a value based on whether the condition is `True` or `False`.
+
+---
+
+### **Syntax**
+```python
+true_value if condition else false_value
+```
+
+---
+
+### **Examples**
+
+#### 1. **Simplifying If/Else Statements**
+```python
+number = 5
+print("Even" if number % 2 == 0 else "Odd")
+```
+**Output:**
+```
+Odd
+```
+
+#### 2. **Assigning Variables**
+```python
+signal = "green light"
+action = "move" if signal == "green light" else "stop"
+print(action)
+```
+**Output:**
+```
+move
+```
+
+#### 3. **Returning Values from Functions**
+```python
+def get_fee(is_member):
+    return 10 if is_member else 20
+
+print(get_fee(False))
+```
+**Output:**
+```
+20
+```
+
+---
+### **Other Implementations of Ternary Operator with Syntax**
+
+#### **1. With Tuples**
+- **Syntax:**
+  ```python
+  (false_value, true_value)[condition]
+  ```
+- **Example:**
+  ```python
+  signal = "green light"
+  action = ("stop", "move")[signal == "green light"]
+  print(action)
+  ```
+- **Output:**
+  ```
+  move
+  ```
+
+---
+
+#### **2. With Lists**
+- **Syntax:**
+  ```python
+  [false_value, true_value][condition]
+  ```
+- **Example:**
+  ```python
+  signal = "green light"
+  action = ["stop", "move"][signal == "green light"]
+  print(action)
+  ```
+- **Output:**
+  ```
+  move
+  ```
+
+---
+
+#### **3. With Dictionaries**
+- **Syntax:**
+  ```python
+  {True: true_value, False: false_value}[condition]
+  ```
+- **Example:**
+  ```python
+  signal = "green light"
+  action = {True: "move", False: "stop"}[signal == "green light"]
+  print(action)
+  ```
+- **Output:**
+  ```
+  move
+  ```
+
+---
+
+#### **4. With Lambda Functions**
+- **Syntax:**
+  ```python
+  (lambda args: false_value, lambda args: true_value)[condition](args)
+  ```
+- **Example:**
+  ```python
+  signal = "green light"
+  action = (lambda msg: f"stop {msg}", lambda msg: f"move {msg}")[signal == "green light"]("now")
+  print(action)
+  ```
+- **Output:**
+  ```
+  move now
+  ```
+
+---
+
+Ternary vs If/Else
+Ternary (shorter and concise):
+
+signal = "green light"
+action = "move" if signal == "green light" else "stop"
+print(action)
+If/Else (longer):
+
+signal = "green light"
+
+if signal == "green light":
+    action = "move"
+else:
+    action = "stop"
+
+print(action)
+Output:
+
+move
+Nested Ternary Operators
+signal = "red light"
+action = "move" if signal == "green light" else "stop" if signal == "red light" else "Invalid Signal"
+print(action)
+Output:
+
+stop
+Equivalent If/Else:
+
+signal = "red light"
+
+if signal == "green light":
+    action = "move"
+elif signal == "red light":
+    action = "stop"
+else:
+    action = "Invalid Signal"
+
+print(action)
+
+---
+
+### **Takeaways**
+1. Ternary operators allow concise one-line `if/else` statements.
+2. They can be implemented using:
+   - **Basic Syntax:** `true_value if condition else false_value`
+   - **Tuples, Lists, Dictionaries, or Lambda Functions**.
+3. Ternary operators are suitable for simple conditional logic.
+4. Avoid nesting them unnecessarily to maintain readability.
+
+
+                #Append function
+
+The append() function in Python helps us add an element at the end of the list. It doesn't create a new list but modifies the existing one.
+
+Syntax: 
+myList.append(element)
+
+
+### **Python `append()` Function: A Summary**
+
+The `append()` function in Python is used to add an element at the end of a list. It modifies the original list directly without creating a new one. 
+
+---
+
+### **Syntax:**
+```python
+myList.append(element)
+```
+
+- **`myList`**: The list to which you want to add an element.
+- **`element`**: The item to be added (mandatory, can be any object like integer, float, string, list, etc.).
+
+---
+
+### **Time Complexity of `append()` in Python**
+
+#### **Best Case (O(1)):**  
+- Adding an element to the end of a list is an **amortized constant-time operation**.  
+- When sufficient space is already allocated for the list, Python simply places the new element at the next available memory slot.
+
+#### **Worst Case (O(N)):**  
+- If the list's allocated memory is full, Python dynamically allocates a **new block of memory**. 
+- The new memory block is typically **double the size** of the original list to reduce future resizing overhead.
+- All existing elements are **copied** to the new memory location, causing an O(N) operation, where N is the number of elements in the original list.
+
+#### **Why Amortized O(1) for Most Cases?**  
+- Though resizing (O(N)) happens occasionally, the cost is **spread across multiple operations**.  
+- As a result, appending a single element remains efficient (O(1)) most of the time.
+
+---
+
+### **Example of Worst Case Resizing**
+
+```python
+# Observe resizing behavior using id()
+import sys
+
+lst = []  
+print(f"Initial size: {sys.getsizeof(lst)} bytes")
+
+for i in range(10):
+    lst.append(i)
+    print(f"Size after appending {i}: {sys.getsizeof(lst)} bytes")
+```
+
+**Output (Sample):**
+```
+Initial size: 56 bytes
+Size after appending 0: 88 bytes
+Size after appending 1: 88 bytes
+Size after appending 2: 88 bytes
+Size after appending 3: 88 bytes
+Size after appending 4: 120 bytes  # Resizing occurs here
+...
+```
+
+**Explanation:**  
+- The memory size increases when the list’s capacity is exceeded.  
+- Existing elements are copied to the newly allocated space.
+
+---
+
+### **Takeaways:**
+1. **Best Case:** Appending is O(1) in most cases due to preallocated memory.  
+2. **Worst Case:** When resizing occurs, appending takes O(N) because of element copying.  
+3. **Amortized Efficiency:** Resizing is infrequent, so the operation remains efficient overall.
+---
+
+### **Return Value:**
+- The `append()` function returns `None`.
+
+---
+
+### **Examples:**
+
+#### **1. Adding Basic Elements**
+```python
+list1 = ['programming', 5, 'Hello geeks']
+
+list1.append(10)
+list1.append('python')
+list1.append(27.5)
+
+print(list1)
+```
+**Output:**
+```
+['programming', 5, 'Hello geeks', 10, 'python', 27.5]
+```
+
+---
+
+#### **2. Adding Iterables (List, Set, Dictionary)**
+```python
+list1 = ['programming', 5, 'Hello geeks']
+
+list1.append(['python', 'javascript', 50])  # Add list
+list1.append({50, 40, 10, 20})             # Add set
+list1.append({"key1": "Value1", "key2": "Value2"})  # Add dictionary
+
+print(list1)
+```
+**Output:**
+```
+['programming', 5, 'Hello geeks', ['python', 'javascript', 50], {40, 50, 10, 20}, {'key1': 'Value1', 'key2': 'Value2'}]
+```
+
+---
+
+#### **3. Nested Lists**
+```python
+list1 = ['1', '2', '3']
+list2 = ['4', '5', '6', '7']
+
+list1.append(list2)  # Append list2 to list1
+print(list1)
+
+list2.append(['8', '9', '10'])  # Append another list to list2
+print(list1)
+```
+**Output:**
+```
+['1', '2', '3', ['4', '5', '6', '7']]
+['1', '2', '3', ['4', '5', '6', '7', ['8', '9', '10']]]
+```
+
+---
+
+### **Key Takeaways:**
+- `append()` directly modifies the original list.
+- It can add any object, including other lists, sets, or dictionaries.
+- The function is efficient but may involve O(N) time in rare cases when resizing the list's memory.
+
+
+# Order of Evaluation of Logical Operators
+
+->  Not > And > Or
+
+# if even worst case of append is O(n) we still say it's O(1) as it's very rare to occur
+
+! Question
+print(not (1 and 9))
+
+output: False
+
+Docstrings
+
+Python comes with an inbuilt feature called DocString(“documentation strings”) that allows you to associate documentation with modules, functions, classes, and methods. The multiline comments become docstrings if they are placed directly after a function or class signature. Due to docstring, which is a corollary of the multiline comment in Python, multiline comments are not supported since the compiler considers them as they are described within functions, classes, and modules. Strings with multiple lines may be used as multiline comments; unless used as docstrings, they will not generate code.
+
+The linear search algorithm's time complexity is:
+
+For base case it is 
+O(1)
+
+For average case it is 
+O(n)
+
+For worst case it is 
+O(n)
+

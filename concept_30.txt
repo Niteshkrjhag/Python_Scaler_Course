@@ -1,0 +1,42 @@
+# Reversing an Interger Value
+
+a=0
+i = 1
+
+def rev(n = 0):
+    global a
+    global i
+    if n>0:
+        rev(int(n/10))
+        a +=(n%10)*i
+        i*=10
+    return a
+
+rev(524)
+print(a)
+
+# Checking whether element of list is sorted in ascending order or not
+
+def sortedOrNot(arr):
+    length = len(arr)    // This is the way to calculate the size of the list
+    if(length==0):
+        return True
+    elif (length == 1):
+        return False
+    
+    return arr[0]<=arr[1] and sortedOrNot(arr[1:])
+
+arr=[1,2,3,4,5]
+print(sortedOrNot(arr))
+
+#Checking whether a string is pallindrome or Not
+
+def Pallin(n):
+    length = len(n)
+    if(length == 1):
+        return True
+    return n[0]==n[-1] and Pallin(n[1:-1])
+
+print(Pallin('ABCBA'))
+print(Pallin('ABCAB'))
+

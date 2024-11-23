@@ -1,0 +1,199 @@
+Exceptions are errors that are detected during execution. Whenever there is an error in a program, exceptions are raised.
+
+- An exception is a class in Python that represents an error. When an exception is raised during the execution of code, it disrupts the normal flow of the program and can lead to a halt state or even a crash. 
+
+All the inbuilt exceptions in python are inherited from the common ‘Exception’ class.
+
+Exception Name	                                    Description
+Exception	        All exceptions inherit this class as the base class for all exceptions.
+StopIteration	    Raised when the next() method of an iterator while iteration does not point to any object
+StandardError	    All exceptions inherit this class except stop StopIteration and SystemExit
+ArithmeticError	    Errors that occur during numeric calculation are inherited by it.
+OverflowError	    When a calculation exceeds the max limit for a specific numeric data type
+ZeroDivisionError	Raised when division or modulo by zero takes place.
+AssertionError	    Raised when an assert statement fails
+AttributeError	    Raised in case of failure of attribute assignment
+EOFError            Raised when the end of file is reached, usually occurs when there is no input from input () function
+ImportError	        Raised when an import statement fails
+NameError	        Raised when an identifier is not found in the local or non-local or global scope.
+SyntaxError	        Raised when there is an error in python syntax.
+IndentationError	Raised when indentation is not proper
+TypeError	        Raised when a specific operation of a function is triggered for an invalid data type
+ValueError	        Raised when invalid values are provided to the arguments of some builtIn function for a data type that has a valid type of arguments.
+RuntimeError	    Raised when an error does not fall into any other category
+NotImplementedError	Raised when an abstract method that needs to be implemented in an inherited class is not actually implemented.
+
+? Example 
+
+def divideNos(a, b):
+  return a/b # An exception might raise here if b is 0 (ZeroDivisionError)
+try:
+   a = input('enter a:')
+   b = input('enter b:')
+   print('after division', divideNos(a, b)) 
+   a = [1, 2, 3]
+   print(a[3]) # An exception will raise here as size of array ‘a’ is 3 hence is accessible only up until 2nd index
+ 
+# if IndexError exception is raised
+except IndexError:            
+   print('index error')
+# if ZeroDivisionError exception is raised
+except ZeroDivisionError:
+   print('zero division error')
+
+
+! Raising Custom Exceptions
+
+Custom and predefined exceptions can also be thrown manually by raising it for specific conditions or a scenario using the raise keyword. (A custom exception is an exception that a programmer might raise if they have a requirement to break the flow of code in some specific scenario or condition) String messages supporting the reasons for raising an exception can also be provided to these custom exceptions.
+
+? Syntax 
+
+try:
+    # on some specific condition or otherwise
+    raise SomeError(OptionalMsg)
+Except SomeError as e:
+    # Executed if we get an error in the try block
+    # Handle exception ‘e’ accordingly
+
+? Example
+
+def isStringEmpty(a):
+   if(type(a)!=str):
+       raise TypeError('a has to be string')
+   if(not a):
+       raise ValueError('a cannot be null')
+   a.strip()
+   if(a == ''):
+       return False
+   return True
+ 
+try:
+ a = 123
+ print('isStringEmpty:', isStringEmpty(a))
+except ValueError as e:
+   print('ValueError raised:', e)
+ 
+except TypeError as e:
+   print('TypeError raised:', e)
+
+
+! Else and Finally 
+
+try:
+    # Some Code
+except:
+    # Executed if an error is raised by the try block
+    # Handle exception here
+else: 
+    # OPTIONAL & Executed if no exceptions are raised
+finally:
+    # OPTIONAL & will always be executed in the end
+
+! What Happens if Errors are Raised in Except or Finally Block?
+
+try:
+  SomeFunction() # assuming it throws some error
+except exception as e:
+  Log(e) # assuming some exception occurred again while logging this exception
+finally: 
+  # This will still execute even after an error was raised inside catch block & gives you a final chance to handle the situation your way
+
+! But what if an error occurs in the finally block?
+
+try:
+  raise Exception("message from try block")
+except Exception as e:
+  print('in except block:', e)
+  raise Exception("exception raised in except block")
+finally:
+  print("in finally")
+  raise Exception("exception raised in finally block")
+
+Output:
+in except block: message from try block
+in finally
+Traceback (most recent call last):
+  File "<string>", line 2, in <module>
+Exception: message from try block
+
+- During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<string>", line 5, in <module>
+Exception: exception raised in except block
+
+- During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+Exception: exception raised in finally block
+
+! Note = finally block won't be completed beyond the point where the exception is thrown. 
+
+- Q) Important Example 
+
+try:
+    a = 10/0
+except Exception as e:
+    print(e)
+    print("1")
+    print(10/0)
+    print("3")
+finally:
+    print("2")
+    print("Error in Except then also i ran")
+    print(10/0)    
+    print("Hello")  #will not run
+
+! Execution
+
+Line 2 (a = 10 / 0): Raises a ZeroDivisionError → jumps to the except block.
+Line 4 (print(e)): Prints "division by zero".
+Line 5 (print("1")): Prints "1".
+Line 6 (print(10 / 0)): Raises another ZeroDivisionError. Execution jumps to the finally block.
+Lines 9-10 (finally block): Prints:
+? 2
+? Error in Except then also i ran
+Program Terminates:
+Prints traceback of the second ZeroDivisionError.
+
+Final Output Before Traceback:
+
+division by zero
+1
+2
+Error in Except then also i ran
+
+Final Output after traceback
+
+division by zero
+1
+2
+Error in Except then also i ran
+Traceback (most recent call last):
+  File "<filename>", line 6, in <module>
+    print(10 / 0)
+ZeroDivisionError: division by zero
+
+
+% Take aways 
+
+- Exceptions in the try block:
+When an exception occurs in the try block, the program immediately jumps to the appropriate except block, skipping the remaining code in the try block.
+
+- except block:
+The except block handles the exception. If an exception is raised inside the except block and it is not handled, the program will crash after the finally block is executed.
+
+- finally block always executes:
+The finally block is executed regardless of what happens in the try or except blocks. This applies even if:
+An exception is raised in the try block.
+An exception is raised in the except block.
+No exceptions are raised at all.
+
+- Program termination after finally:
+If an unhandled exception occurs (e.g., in the except block), the program will terminate after the finally block has executed.
+
+- Error message when program crashes:
+If the program crashes due to an unhandled exception, a traceback will be printed to the console, showing the line where the exception occurred.
+No code after the finally block runs if the program crashes:
+If an unhandled exception causes the program to terminate, any code written after the finally block will not execute.

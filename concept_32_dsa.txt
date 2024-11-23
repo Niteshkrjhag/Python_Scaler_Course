@@ -1,0 +1,189 @@
+# list 
+
+- The data stored in the List is ordered. That is, it will be stored in the way we input it.
+
+? My_List = [3, 4, 6, 10, 8]
+ 
+# Accessing values stored in lists using positive index
+print("Values accessed using positive Index.")
+print(My_List[2])
+print(My_List[4])
+ 
+# Accessing values stored in lists using negative index
+print("Values accessed using negative Index.")
+print(My_List[-1])
+print(My_List[-5])
+
+
+# Nested List
+nested_List = [[6, 2, 8], [1, 3.5, "Interviewbit"], "preparation"]
+print(nested_List[0][1])
+print(nested_List[1][2])
+
+My_List = [3, 4, 6, 10, 8, 5]
+print(My_List)
+# Changing value to index 3.
+My_List[3] = 7
+print(My_List)
+# Changing value to index -1, i.e the last value.
+My_List[-1] = 15
+print(My_List)
+
+? Add/Change list Elements in Python
+
+vowels = ['a', 'e']
+print(vowels)
+# Appending an element in list
+vowels.append('i')   // append() method to add a single element at the end of the list
+print(vowels)
+# Extending an element in list
+vowels.extend(['o', 'u'])   // extend() method to add multiple elements at the end of the list.
+print(vowels)
+# Inserting an element at a specified index
+Integers = [1, 5, 6, 9]     
+Integers.insert(1,7)        //  insert() method takes two arguments, the first is the index at which the element is to be inserted, and the second is the value/ element to be inserted.
+print(Integers)
+
+
+# Deleting/Removing items from the List.
+my_List = [1, 2, 3, 4, 5, 6, 7, 8]       
+print(my_List)
+# Deleting/Removing a single item from the list
+del my_List[3]     ? We can delete one or multiple elements from the list in python using the del keyword.
+print(my_List)
+# Deleting the entire List
+del my_List
+# The below line will generate an error as the List doesn’t exist now.
+print(my_List)
+
+
+? Deleting/Removing items from List using various methods
+
+my_List = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+print(my_List)
+# Deleting/Removing using remove() method
+my_List.remove(4)
+print(my_List)
+# Deleting/Removing using pop() method
+print(my_List.pop(1))
+print(my_List)
+# pop() method with no arguments
+print(my_List.pop())
+print(my_List)
+# clear() method
+my_List.clear()
+print(my_List)
+
+Output : 
+
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+[1, 2, 3, 5, 6, 7, 8, 9]
+2
+[1, 3, 5, 6, 7, 8, 9]
+9
+[1, 3, 5, 6, 7, 8]
+[]
+
+#Concatenation
+
+List1 = [1, 2, 3, 4] 
+List2 = [5, 6, 7, 8]
+concat_List = List1 + List2
+print(concat_List)
+
+#Repeating the elements of the list:
+
+my_List = [1, 2, 3, 4] 
+print(my_List*2)
+
+#Membership Check of an element in a list:
+
+my_List = [1, 2, 3, 4, 5, 6] 
+print(3 in my_List)
+print(10 in my_List)
+print(10 not in my_List)
+
+#Iterating through the list:
+
+my_List = [1, 2, 3, 4, 5] 
+for n in my_List:
+      print(n)
+
+#Finding the length of List in python:
+
+my_List = [1, 2, 3, 4, 5]
+print(len(my_List))
+
+#Slicing a List in Python
+
+my_List = ['i', 'n', 't', 'v', 'i', 'e', 'w', 'b', 'i', 't']
+# Accessing elements from index beginning to 5th index
+print(my_List[:6])
+# Accessing elements from index 3 to 6
+print(my_List[3:7])
+# Accessing elements from index 5 to end
+print(my_List[5:])
+# Accessing elements from beginning to end
+print(my_List[:])
+# Accessing elements from beginning to 4th index
+print(my_List[:-6])
+
+
+List = [1, 2, 3, 4, 5, 6, 7, 8]
+print(List)
+# Changing elements from index 2nd to 5th
+List[2:5] = [1, 1, 1]
+print(List)
+# Deletion multiple items from the List
+del List[2:6]
+print(List)
+
+# List Methods in Python
+
+S. No.	Method	Description of method
+1	append()	->Add an item to the ending of the list.
+2	extend()	Add items of one list to another list.
+3	insert()	Adds an item at the desired index position.
+4	remove()	Remove the primary item from the list with the required value.
+5	pop()	    Remove the item from the required index within the list, and return it.
+6	clear()	    Remove all items from the list.
+7	index()	    Returns 0-based index of the first matched item. Raises ValueError if an item isn’t found within the list.
+8	count()	    Returns the frequency of an element appearing in the list.
+9	sort()	    Sorts the objects of the list. It uses a compare function if passed as an argument.
+10	reverse()	Reverse the order of the list items in place.
+11	copy()	    Return a shallow copy of the list i.e. two lists share the identical elements via reference.
+
+1	len(my_List)	Calculates and returns the length or size of the list
+2	max(my_List)	Returns the item with maximum value within the list
+3	min(my_List)	Returns the item with minimum value within the list
+4	list(iterable)	Return the list containing the elements of the iterable.
+5	filter(function,sequence)	Test each element of the list as true or not on the function passed as an argument thereto and returns a filtered iterator.
+
+6	map(function, iterator)	Returns a list after applying the function passed as an argument to every element of the iterable.
+
+7	lambda()	An anonymous function that may have any number of arguments but one expression, that calculates and returns the result.
+
+8	all()	Returns True if all the items/elements present within the list are true or if the list is empty.
+
+9	any()	Returns True if any of the item(s)/at least one among the items present within the list is/are true. And returns False if the list is empty.
+
+10	sum()	Returns the sum of all the elements present within the list.
+
+11	reduce(func, sequence)	It applies a function passed as an argument to all the elements of the sequence and returns a result based on the function.
+
+? List Comprehension
+
+my_List = ['i', 'n', 't', 'e', 'r', 'n']
+# iterating using List Comprehension
+[print(x, end = ' ') for x in my_List]
+
+
+# enumerate method
+
+my_List = ['i', 'n', 't', 'e', 'r', 'n']
+# iterating using enumerate
+for i, item in enumerate(my_List):
+    if i%2 == 0:
+        print(i, item)
+
+# Range function for i in (0,4) means starting from 0 till 4 but 4 not included

@@ -1,0 +1,91 @@
+# Lambda or Anonymous Function
+
+lambda [arguments] : expression
+
+- Expression: After the colon, you write a single expression that the function will evaluate and return. Unlike regular functions, a lambda function is limited to a single expression and cannot contain multiple statements or commands.
+
+? This anonymous function is beneficial when we want to pass functions as an argument to the other functions.
+ 
+ -> # Example of lambda function
+    print( (lambdax : 6 + x)(4)) #10
+
+In the lambda function, we can pass multiple arguments but only a single expression, so obviously, it can’t be replaced with the regular function, 
+
+! 1. Lambda Function with Iterables
+
+% filter()
+   -> The filter() function takes two arguments: the first is the lambda function as an anonymous function, and the second argument is the list of numbers.
+
+   filter(function, list)
+
+   When we call the filter function, it iterates over the provided list and passes every value one by one to the function, which returns true or false.
+
+If that particular value's result is true, it gets added to the list.
+
+#List of numbers
+numbers = [1,2,3,4,5,6,7,8]
+ 
+# liner code to make a list of even numbers using filter() function
+even_no = list(filter((lambda x : x % 2 == 0), numbers))
+ 
+# even numbers list
+print(even_no) # [2, 4, 6, 8]
+
+% map()
+    The Python map() function is mostly used to modify the items in the list.
+
+It takes two arguments: the first argument is the lambda function as an anonymous function, and the second  argument is the list.
+
+    map( function, list)
+
+The map() function iterates over the list provided as a parameter, and each value is passed as a parameter to evaluate with the expression of the lambda function. Then, these evaluated values are returned one after another.
+
+# Given list of numbers
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+ 
+# One-liner code to create the list of squares of the numbers using the map() function
+sq_numbers = list(map((lambda x : x*x), numbers))
+ 
+# Printing the new list
+print(sq_numbers) # [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+
+% reduce()
+    The Python reduce() function is mostly used to reduce the entire list into a single result.
+
+The reduce() function needs to be imported from the functools module. Functools is one of the modules in Python which contains some higher-order functions.
+
+The reduce() function takes two arguments: the first is the function, and the second is the list.
+
+reduce( function, list)
+
+The reduce() function iterates over the given list of numbers, and these numbers are passed to the lambda function as a parameter. When the entire list is iterated, the final result is returned by the reduce() function.
+
+
+
+#importing reduce() function from functools module
+from functools import reduce
+ 
+# Given a list of numbers
+numbers = [ 1, 2, 3, 4, 5, 6]
+ 
+# One-liner code to do the addition of all numbers using the reduce() function
+sum = reduce((lambda x, y: x + y), numbers)
+ 
+# Result of addition
+print(sum) #21
+
+! 2. Lambda Function with List Comprehension
+
+you can use a lambda function within a list comprehension to square each number in a list:
+numbers = [1, 2, 3, 4, 5]
+squared_numbers = [(lambda x: x**2)(x) for x in numbers]
+
+! . Lambda Function with if-else
+lambda x: 'Even' if x % 2 == 0 else 'Odd'
+
+
+
+
+
+

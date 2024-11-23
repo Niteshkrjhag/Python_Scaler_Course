@@ -1,0 +1,722 @@
+Decorators in Python are functions that takes another function as an argument and extends its behavior without explicitly modifying it.
+
+This means that a decorator adds new functionality to a function.
+
+To understand decorators in Python, you must have an understanding of the following concepts:
+
+How functions work.
+First-Class Objects.
+Inner Functions.
+Higher-Order Functions.
+
+### Understanding Decorators in Python
+
+#### Functions in Python
+- A function performs a task and optionally returns a value based on arguments.
+- Example: 
+  
+  def twice(number):
+      return number * 2
+  
+
+---
+
+#### First-Class Objects
+- Functions in Python are treated as first-class objects. They can be assigned to variables, passed as arguments, or returned from other functions.
+
+**Assigning a Function to a Variable**  
+  
+  def foo():
+      print("I am foo")
+
+  also_foo = foo
+  foo()        # I am foo
+  also_foo()   # I am foo
+  
+
+---
+
+#### Passing a Function to Another Function
+- Functions can be passed as arguments to other functions.
+
+Example:
+  
+  def do_twice(func):
+      func()
+      func()
+
+  def say_hello():
+      print("Hello!")
+
+  do_twice(say_hello)
+  # Output:
+  # Hello!
+  # Hello!
+  
+
+---
+
+#### Returning a Function from a Function
+- Functions can return other functions.
+
+Example:
+  
+  def return_to_upper():
+      return str.upper
+
+  to_upper = return_to_upper()
+  print(to_upper("scaler topics"))  # SCALER TOPICS
+  
+
+---
+
+#### Higher-Order Functions
+- A function that takes another function as an argument or returns a function is called a higher-order function.
+
+---
+
+#### Inner Functions
+- A function defined inside another function is an **inner function** or **nested function**.  
+Example:
+  
+  def parent():
+      print("I am the parent function")
+
+      def first_child():
+          print("I am the first child function")
+
+      def second_child():
+          print("I am the second child function")
+
+      first_child()
+      second_child()
+
+  parent()
+  
+
+- **Closures**: Inner functions can access variables from their enclosing scope.  
+Example:
+  
+  def outer(message):
+      def inner():
+          print("Message:", message)
+
+      return inner
+
+  hello_msg = outer("Hello!")
+  hello_msg()  # Message: Hello!
+
+  bye_msg = outer("Bye!")
+  bye_msg()    # Message: Bye!
+  
+
+---
+
+### Takeaways
+1. **Functions as First-Class Objects**: Assign, pass, or return functions just like variables.
+2. **Inner Functions**: Used locally within their parent functions and can form closures.
+3. **Decorators**: A function that takes another function and extends its behavior without modifying it.
+
+
+% Real-Life Analogy:
+Imagine you have a simple coffee cup that represents your original function (say_hello). This cup is capable of holding coffee, which represents the behavior (like printing "Hello!").
+
+Step 1: Original Function (Simple Coffee Cup)
+
+You have a plain coffee cup that can only hold coffee:
+The coffee cup can serve coffee when you need it.
+def coffee_cup():
+    return "Coffee"
+When you use this cup, it simply gives you coffee. There's no extra behavior yet.
+Step 2: First Decoration (Adding a Lid to the Cup)
+
+Now, let's say you want to decorate the coffee cup by adding a lid to it. When you add a lid, you don't change the cup itself, but you wrap the cup with the lid, which adds new behavior (it adds some "extra functionality").
+
+The lid will not change the coffee inside, but it will change how you interact with the coffee cup:
+When you open the cup, you first see the lid and then get the coffee.
+The lid doesn't replace the coffee cup. It just wraps it and adds behavior.
+def with_lid(coffee_cup):
+    def wrapper():
+        print("Lid on top")
+        coffee = coffee_cup()  # Calls the original coffee cup function
+        print("Lid removed")
+        return coffee
+    return wrapper
+The coffee cup is now wrapped by a lid, and when you call it, you first see "Lid on top", then get the coffee, and finally see "Lid removed".
+If you call this "decorated" coffee cup, the result is:
+decorated_cup = with_lid(coffee_cup)  # Add a lid to the original cup
+print(decorated_cup())  # Calls the wrapped coffee cup
+Output:
+
+Lid on top
+Coffee
+Lid removed
+Step 3: Second Decoration (Adding a Sleeve to the Cup)
+
+Let's say you want to add a sleeve to the coffee cup now. The sleeve wraps the already lid-wrapped cup. It doesn't replace the lid or the cup but adds another layer of decoration.
+
+The sleeve adds some extra functionality:
+When you get the cup, you see the sleeve, then the lid, and then the coffee.
+def with_sleeve(coffee_cup):
+    def wrapper():
+        print("Sleeve on the cup")
+        result = coffee_cup()  # Calls the already wrapped coffee cup
+        print("Sleeve removed")
+        return result
+    return wrapper
+So now the coffee cup has both a lid and a sleeve. When you call this doubly-wrapped cup, it will show both layers of behavior.
+decorated_cup = with_sleeve(with_lid(coffee_cup))  # Add sleeve over the lid-wrapped cup
+print(decorated_cup())  # Calls the doubly-wrapped coffee cup
+Output:
+
+Sleeve on the cup
+Lid on top
+Coffee
+Lid removed
+Sleeve removed
+? Summary of the Analogy:
+The original coffee cup is like the original function (say_hello), which has basic functionality (like printing "Hello!").
+The lid is the first decorator (with_lid), which wraps the original cup and adds extra behavior.
+The sleeve is the second decorator (with_sleeve), which wraps the already decorated coffee cup and adds even more behavior.
+In each case, the cup itself (the original function) is not replaced; instead, it is wrapped with additional layers that change how you interact with it.
+
+! What Does It Mean When We Say "Decorators Replace the Function with a Wrapper"?
+When you apply a decorator to a function, the function doesn't get replaced in the sense of being destroyed. Instead, the original function gets wrapped inside a new function — a wrapper function.
+
+The wrapper function can execute some code before and after calling the original function.
+When you call the decorated function, you're actually calling the wrapper, which in turn calls the original function (with or without modifying its behavior).
+n Example with say_hello:
+def say_hello():
+    print("Hello!", end="")
+    
+def decorator(func):
+    def wrapper():
+        print("W", end="")
+        func()
+        print("W", end="")
+    return wrapper
+
+say_hello = decorator(say_hello)  # say_hello is now wrapped inside the wrapper function
+
+say_hello()  # This will call the wrapper function, which calls the original say_hello function
+Before decoration: say_hello is just a function that prints "Hello!".
+After decoration: say_hello is now a wrapper function that adds extra behavior (printing "W" before and after calling the original say_hello).
+
+% In Simple Terms:
+When you apply a decorator, the original function gets replaced by a new function — the wrapper.
+This wrapper function adds extra behavior before and after calling the original function.
+So when you call the decorated function, you're not directly calling the original function; you're calling the wrapper function which calls the original function inside it.
+
+x Strengthening Your Concept:
+A decorator is like a gift wrap around a function. It doesn't change the function itself but adds extra functionality.
+Each time you decorate a function, you're essentially adding more layers around it.
+When you call a decorated function, it's like calling the function through multiple layers (like a coffee cup with both a lid and a sleeve).
+By thinking about decorators as wrapping layers, it helps reinforce the idea that you can stack multiple decorators, and each one adds something on top of the previous layer, rather than replacing the original functionality.
+
+
+#Start of the concept 
+
+# Decorator function
+def decorator(func):
+    def wrapper():
+        print("This is printed before the function is called")  # Pre-processing
+        func()  # Call the original function
+        print("This is printed after the function is called")  # Post-processing
+    return wrapper  # Return the modified version of the original function
+
+# Original function
+def say_hello():
+    print("Hello! The function is executing")
+
+# Applying the decorator to say_hello
+say_hello = decorator(say_hello)
+
+# Calling the decorated function
+say_hello()
+
+
+### Output:
+
+This is printed before the function is called
+Hello! The function is executing
+This is printed after the function is called
+
+
+### Explanation:
+
+- **Decorator**: The decorator function accepts a function (func) as an argument. It then defines a wrapper function that modifies the behavior of the original function by adding extra logic (like printing before and after the original function call).
+  
+- **Wrapper**: The wrapper function calls the original func (which is say_hello), but adds behavior before and after the call.
+  
+- **Applying the decorator**: The line say_hello = decorator(say_hello) is where the decoration happens. say_hello now refers to the wrapper function returned by decorator.
+
+### Takeaway:
+
+- A **decorator** modifies a function by wrapping it in another function. The wrapper adds extra behavior before or after the original function is called.
+
+
+Here's the code using the @decorator syntax and a simplified explanation:
+
+### Code:
+
+
+# Decorator function
+def decorator(func):
+    def wrapper():
+        print("This is printed before the function is called")  # Pre-processing
+        func()  # Call the original function
+        print("This is printed after the function is called")  # Post-processing
+    return wrapper  # Return the modified version of the original function
+
+# Applying the decorator using @ syntax
+@decorator
+def say_hello():
+    print("Hello! The function is executing")
+
+# Calling the decorated function
+say_hello()
+
+
+### Output:
+
+This is printed before the function is called
+Hello! The function is executing
+This is printed after the function is called
+
+
+### Explanation:
+
+- **@decorator**: This is the new syntax that Python introduced. Instead of writing say_hello = decorator(say_hello), we can simply add @decorator above the say_hello function. This tells Python to apply the decorator to say_hello.
+  
+- **Same behavior**: The behavior is exactly the same as the previous example, where the decorator wraps the say_hello function and adds extra logic before and after the original function call.
+
+### Takeaway:
+
+- Using the @decorator syntax is a cleaner and more readable way to apply decorators. It simplifies the process by removing the need to manually assign the decorated function.
+
+
+In programming, syntactic sugar refers to syntax that makes code easier to read or express but does not introduce any new functionality. 
+
+In the case of Python decorators, the @decorator syntax is a form of syntactic sugar because it makes applying decorators cleaner and more readable compared to the older way of calling the decorator manually.
+
+
+### Preserving the Original Name and Docstring of the Decorated Function
+
+When you decorate a function, its __name__ and __doc__ attributes get replaced by the wrapper function's name and docstring. To preserve the original function’s name and docstring, use the functools.wraps decorator.
+
+#### Without functools.wraps:
+
+def decorator(func):
+    def wrapper():
+        func()
+    return wrapper
+
+@decorator
+def say_hello():
+    """Says hello"""
+    print("Hello!")
+
+print(say_hello.__name__)  # Output: 'wrapper'
+help(say_hello)  # Displays 'wrapper' docstring
+
+
+#### With functools.wraps:
+
+import functools
+
+def decorator(func):
+    @functools.wraps(func)
+    def wrapper():
+        func()
+    return wrapper
+
+@decorator
+def say_hello():
+    """Says hello"""
+    print("Hello!")
+
+print(say_hello.__name__)  # Output: 'say_hello'
+help(say_hello)  # Displays original docstring
+
+
+### Key Point:
+- **functools.wraps(func)** ensures the original function’s name and docstring are preserved in the wrapper.
+
+
+### Reusing Decorators
+
+Since a decorator is just a function, you can reuse it to decorate multiple functions.
+
+#### Example:
+
+import functools
+
+def do_twice(func):
+    @functools.wraps(func)
+    def wrapper():
+        func()
+        func()
+    return wrapper
+
+
+Now, you can apply do_twice to multiple functions:
+
+
+from decorators import do_twice
+
+@do_twice
+def say_hello():
+    print("Hello!")
+
+@do_twice
+def say_bye():
+    print("Bye!")
+
+say_hello()  # Output: Hello! Hello!
+say_bye()    # Output: Bye! Bye!
+
+
+### Key Point:
+- Decorators can be reused just like any other function to modify multiple functions.
+
+
+
+### Decorators with Function Parameters
+
+When decorating a function with parameters, the wrapper function needs to handle them.
+
+#### Problem:
+
+import functools
+
+def do_twice(func):
+    @functools.wraps(func)
+    def wrapper():
+        func()
+        func()
+    return wrapper
+
+@do_twice
+def say_hello(name):
+    print(f"Hello, {name}!")
+
+say_hello("Kitty")
+
+**Error:** TypeError: wrapper() takes 0 positional arguments but 1 was given
+
+This happens because the wrapper doesn't accept arguments.
+
+#### Solution:
+To handle function parameters, use *args and **kwargs to pass them to the decorated function.
+
+
+import functools
+
+def do_twice(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        func(*args, **kwargs)
+        func(*args, **kwargs)
+    return wrapper
+
+@do_twice
+def say_hello(name):
+    print(f"Hello, {name}!")
+
+say_hello("Kitty")
+
+
+**Output:**
+
+Hello, Kitty!
+Hello, Kitty!
+
+
+#### Takeaway:
+Use *args and **kwargs in the wrapper function to handle any arguments in the decorated function.
+
+
+### Returning Values from Decorated Functions
+
+When decorating a function that returns a value, the wrapper function must return the result to avoid losing it.
+
+#### Problem:
+
+import functools
+
+def do_twice(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        func(*args, **kwargs)
+        func(*args, **kwargs)
+    return wrapper
+
+@do_twice
+def add(num1, num2):
+    print(f"Adding {num1} and {num2}")
+    return num1 + num2
+
+print("The sum is:", add(1, 2))
+
+**Output:**
+
+Adding 1 and 2
+Adding 1 and 2
+The sum is: None
+
+The result is None because the wrapper doesn't return the result.
+
+#### Solution:
+Ensure the wrapper returns the result of the decorated function.
+
+
+import functools
+
+def do_twice(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        func(*args, **kwargs)
+        return func(*args, **kwargs)
+    return wrapper
+
+@do_twice
+def add(num1, num2):
+    print(f"Adding {num1} and {num2}")
+    return num1 + num2
+
+print("The sum is:", add(1, 2))
+
+
+**Output:**
+
+Adding 1 and 2
+Adding 1 and 2
+The sum is: 3
+
+
+#### Takeaway:
+The wrapper function must return the value from the decorated function to ensure it's not lost.
+
+
+### Decorators with Arguments
+
+You can pass arguments to a decorator by wrapping the decorator inside another function that accepts the arguments. The outer function returns the actual decorator.
+
+#### Example: Repeat Decorator
+
+We extend the do_twice decorator to repeat a function multiple times:
+
+
+import functools
+
+def repeat(num_times):
+    def decorator_repeat(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            for _ in range(num_times):
+                func(*args, **kwargs)
+        return wrapper
+    return decorator_repeat
+
+@repeat(num_times=3)
+def say_hello(name):
+    print(f"Hello, {name}!")
+
+say_hello("Kitty")
+
+
+**Output:**
+
+Hello, Kitty!
+Hello, Kitty!
+Hello, Kitty!
+
+
+#### Explanation:
+1. repeat(num_times) is the outer function accepting the argument.
+2. decorator_repeat(func) is the decorator that wraps the function and repeats it num_times.
+3. wrapper(*args, **kwargs) calls the decorated function multiple times.
+
+The usage @repeat(num_times=3) is equivalent to:
+
+say_hello = repeat(num_times=3)(say_hello)
+
+
+#### Takeaway:
+You can pass arguments to a decorator by using an outer function that returns the actual decorator.
+
+
+
+### Chaining Decorators
+
+Chaining decorators allows you to apply multiple decorators to a single function. The order of application matters.
+
+#### Example: Split and Uppercase Decorators
+
+
+import functools
+
+def split_string(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        return func(*args, **kwargs).split()
+    return wrapper
+
+def to_upper(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        return func(*args, **kwargs).upper()
+    return wrapper
+
+@split_string
+@to_upper
+def say_hello(name):
+    return f"Hello, {name}!"
+
+print(say_hello("Kitty"))
+
+
+**Output:**
+
+['HELLO,', 'KITTY!']
+
+
+#### Explanation:
+- to_upper is applied first, converting the string to uppercase.
+- split_string is then applied, splitting the string into a list.
+
+The equivalent form is:
+
+say_hello = split_string(to_upper(say_hello))
+
+
+#### Takeaway:
+You can apply multiple decorators to a function by stacking them, with the order of application determining the result.
+
+### Fancy Decorators
+
+Decorators can be used with both methods and entire classes in Python, creating "fancy" decorators.
+
+#### 1. **Decorating Class Methods**
+Python provides several built-in decorators for class methods:
+
+- **@classmethod**: A method bound to the class, not the instance. It takes the class as the first argument.
+- **@staticmethod**: A method that doesn't access the instance or class but belongs to the class namespace.
+- **@property**: Used for getter and setter methods.
+
+**Example:**
+
+
+class Browser:
+  __NO_OF_WINDOWS = 0
+
+  def __init__(self, page):
+    self._page = page
+    Browser.__NO_OF_WINDOWS += 1
+
+  @property
+  def page(self):
+    return self._page
+
+  @page.setter
+  def page(self, new_page):
+    if not isinstance(new_page, str):
+      raise TypeError("Page must be a string")
+    self._page = new_page
+
+  @classmethod
+  def with_incognito(cls, new_page):
+    instance = cls(new_page)
+    instance.is_incognito = True
+    return instance
+
+  @staticmethod
+  def get_browser_info():
+    return {"name": "Chrome", "version": "96.0.4664.110", "OS": "Windows"}
+
+
+#### 2. **Decorating the Entire Class**
+Class decorators modify class instantiation or functionality, but don't affect class methods directly. A common example is the @dataclass decorator.
+
+**Example:**
+
+
+from dataclasses import dataclass
+
+@dataclass
+class User:
+  username: str
+  password: str
+  active: bool
+
+user = User("sheldon", "password", True)
+print(user.username)
+
+
+#### 3. **Classes as Decorators**
+You can also use a class as a decorator by implementing the __call__ method, making the class callable.
+
+**Example:**
+
+
+import functools
+
+class CountCalls:
+  def __init__(self, func):
+    functools.update_wrapper(self, func)
+    self.func = func
+    self.num_calls = 0
+
+  def __call__(self, *args, **kwargs):
+    self.num_calls += 1
+    print(f"Call {self.num_calls} of {self.func.__name__}")
+    return self.func(*args, **kwargs)
+
+@CountCalls
+def say_hello():
+  print("Hello!")
+
+say_hello()
+say_hello()
+
+
+**Output:**
+
+Call 1 of 'say_hello'
+Hello!
+Call 2 of 'say_hello'
+Hello!
+
+
+#### 4. **Real-World Use: Measuring Execution Time**
+
+A practical use of decorators is measuring function execution time:
+
+
+from time import time, sleep
+
+def measure(func):
+    def wrapper(*args, **kwargs):
+        start_time = time()
+        func(*args, **kwargs)
+        print(f"{func.__name__} took {time() - start_time}")
+    return wrapper
+
+@measure
+def sleepy_function(sleep_time):
+    sleep(sleep_time)
+
+sleepy_function(0.3)
+sleepy_function(0.5)
+
+
+**Output:**
+
+sleepy_function took 0.3003675937652588
+sleepy_function took 0.5005733966827393
+
+
+#### Takeaways:
+- **Methods**: Use @classmethod, @staticmethod, and @property.
+- **Classes**: Decorate classes or methods directly or use a class as a decorator.
+- **Real-World**: Measure performance or modify behavior dynamically using decorators.

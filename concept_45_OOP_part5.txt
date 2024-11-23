@@ -1,0 +1,206 @@
+### Introduction to Closures in Python
+
+A **closure** in Python is a function that remembers and has access to variables from its enclosing (outer) function, even after the outer function has finished executing. Let's break it down:
+
+1. **Nested Functions**: A closure involves a nested function (inner function) that has access to variables from the outer function.
+   
+   python
+   def outer_func():
+       message = 'Hello'
+       def inner_func():
+           print(message)
+       return inner_func
+   
+
+2. **Free Variables**: In the above example, 'message' is a free variable in 'inner_func'. It's not local to 'inner_func', but 'inner_func' remembers it even after 'outer_func' finishes.
+
+3. **Closure**: A closure is the combination of the inner function and the free variables it captures from the outer function.
+
+### Key Properties of Closures:
+- **Nested Function**: The inner function is defined within the outer function.
+- **Access to Free Variables**: The inner function can access variables from the outer scope (even after the outer function finishes).
+- **Returned from Outer Function**: The closure function is returned from the outer function.
+- **Function Object**: The closure behaves like an object, retaining references to the outer scope's variables.
+
+### Example: Divider Function
+
+python
+def divider(y):
+    def divide(x):
+        return x / y
+    return divide
+
+d1 = divider(2)
+print(d1(20))  # Output: 10.0
+
+- Here, 'd1' is a closure, remembering 'y = 2'. When called with 'x = 20', it divides 20 by 2.
+
+### Example: Adder Function
+
+python
+def f1(x):
+    def f2(y):
+        return x + y
+    return f2
+
+adder = f1(12)
+print(adder(4))  # Output: 16
+
+- 'adder' is a closure with 'x = 12'. When 'adder(4)' is called, it returns '12 + 4'.
+
+### When to Use Closures:
+- **Avoid Unnecessary Classes**: Closures can replace classes when only a couple of methods are needed, making the code cleaner.
+- **Avoid Global Variables**: Use closures to keep variables local to an outer function, rather than in the global scope.
+- **Data Hiding**: You cannot call the inner function directly, ensuring data hiding and encapsulation.
+
+### Benefits of Closures:
+- **Increased Readability**: Simplifies code by avoiding unnecessary classes or global variables.
+- **Encapsulation**: Provides data hiding and keeps the internal details hidden from the outside.
+
+### Conclusion:
+A **closure** in Python is a powerful feature that allows functions to remember values from their enclosing scope. Key features:
+- Nested function with access to outer function variables.
+- Can be returned and used as a function object.
+- Helps in creating more readable, encapsulated code.
+
+Closures are useful for avoiding global scope, replacing simple classes, and ensuring data privacy.
+
+                    # Property Method
+
+@property is a decorator. If we want to use a function like a property or an attribute, we can use @property decorator in python.
+The @property decorator in python is a built-in decorator that comes under property() function.
+The property() method is used to define the properties of a python class. The basic syntax of property() method is: property(fget, fset, fdel, doc)
+The @property decorator in python can be used to only access the value. We cannot modify or delete the values.
+The setter method helps in modifying the value of the function in the class. The syntax of declaring the setter method decorator is: @property-name.setter, which is invoked as a method.
+Python also has deleter method which is used to delete a property of the class. The syntax of declaring the deleter method decorator is: @property-name.deleter, which is invoked as a method.
+
+
+
+### @property Decorator in Python
+
+The '@property' decorator is a built-in Python decorator used to turn a method into a "getter" for an attribute. It allows you to access the result of a method as if it were an attribute, simplifying code and improving encapsulation.
+
+#### Key Concepts
+
+1. **Decorator**: A function that takes another function and modifies its behavior.
+2. **Property**: With the '@property' decorator, methods can be accessed like attributes, providing a clean and Pythonic way to manage data access, without exposing the internal implementation.
+
+#### Syntax and Usage of @property
+
+python
+class Person:
+    def __init__(self, name, age):
+        self._name = name  # Private attribute
+        self._age = age
+
+    # Getter method using @property decorator
+    @property
+    def name(self):
+        return self._name
+
+    # Setter method using @name.setter decorator
+    @name.setter
+    def name(self, new_name):
+        self._name = new_name
+
+    # Deleter method using @name.deleter decorator
+    @name.deleter
+    def name(self):
+        print(f"{self._name} is deleted.")
+        del self._name
+
+# Example Usage
+p = Person("Alice", 30)
+print(p.name)  # Accessing property using getter
+
+p.name = "Bob"  # Using setter
+print(p.name)  # Accessing updated value
+
+del p.name  # Deleting the name attribute
+
+
+#### Output:
+
+Alice
+Bob
+Bob is deleted.
+
+
+### Explanation of the Code
+
+1. **Getter ('@property')**: 
+   - The 'name()' method is decorated with '@property', making it a getter for 'self._name'. 
+   - Accessing 'p.name' is now equivalent to calling 'p.name()' but without parentheses.
+
+2. **Setter ('@name.setter')**:
+   - The 'name()' method can also be used as a setter, modifying the value of 'self._name'. 
+   - We use 'p.name = "Bob"' to set the value.
+
+3. **Deleter ('@name.deleter')**:
+   - The 'name()' method is also decorated with '@name.deleter', allowing us to delete the 'name' attribute from the instance.
+   - The 'del p.name' command invokes the deleter method, deleting the 'name' attribute.
+
+### Why Use @property?
+- **Encapsulation**: The '@property' decorator hides the internal representation of a value and allows you to control how data is accessed and modified.
+- **Simplicity**: It enables a cleaner and more readable code by providing an intuitive interface to interact with attributes.
+- **Validation**: By using getters and setters, you can add logic to check or modify data before it's accessed or modified.
+
+### Corrected Example with Comments:
+
+python
+class Student:
+    def __init__(self, name=""):
+        self._name = name  # Private variable for name
+
+    # Getter method to access the name
+    @property
+    def name(self):
+        return self._name
+
+    # Setter method to update the name
+    @name.setter
+    def name(self, new_name):
+        if not new_name:
+            raise ValueError("Name cannot be empty")
+        self._name = new_name
+
+if __name__ == "__main__":
+    student = Student("Tom")  # Creating a student object
+
+    print(f"Student Name: {student.name}")  # Accessing name through getter
+
+    student.name = "Jerry"  # Setting a new name through setter
+    print(f"Updated Name: {student.name}")
+
+    try:
+        student.name = ""  # Attempting to set an empty name (raises ValueError)
+    except ValueError as e:
+        print(e)
+
+
+### Output:
+
+Student Name: Tom
+Updated Name: Jerry
+Name cannot be empty
+
+
+### Concept Summary
+
+- **@property**: Turns a method into a getter for an attribute.
+- **@name.setter**: Allows setting the value of the property.
+- **@name.deleter**: Provides a way to delete the property.
+
+Using '@property' makes your code cleaner, more Pythonic, and allows you to encapsulate logic for getting, setting, or deleting attributes in an object, ensuring better control over data access.
+
+
+! Important Quesiton 
+-> def ordi():
+ print("Ordinary")
+ordi
+ordi()
+
+Output: (what will be the output)
+
+ordi (without parentheses) just refers to the function, but does not execute it.
+ordi() (with parentheses) calls the function and executes its code (in this case, printing "Ordinary").

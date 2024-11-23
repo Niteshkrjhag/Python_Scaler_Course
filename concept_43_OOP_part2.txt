@@ -1,0 +1,510 @@
+#Encapsulation in Python refers to the practice of hiding the implementation details of an object or class, and only exposing a public interface for interacting with it.
+
+Encapsulation is achieved through the use of access modifiers such as 'public', 'private', and 'protected'.
+
+Variables and methods declared with the 'private' or 'protected' access modifiers are not accessible from outside the class, while those declared as 'public' are.
+
+Encapsulation helps to promote code reusability, maintainability, and security by preventing external code from accessing or modifying the internal state of an object or class.
+
+# illustrating public members & public access modifier 
+class pub_mod:
+    # constructor
+    def __init__(self, name, age):
+        self.name = name;
+        self.age = age;
+ 
+    def Age(self): 
+        # accessing public data member 
+        print("Age: ", self.age)
+# creating object 
+obj = pub_mod("Jason", 35);
+# accessing public data member 
+print("Name: ", obj.name)  
+# calling public member function of the class 
+obj.Age()
+
+- Encapsulation in Python using private members
+
+# illustrating public members & public access modifier 
+class pub_mod:
+    # constructor
+    def __init__(self, name, age):
+        self.name = name;
+        self.age = age;
+ 
+    def Age(self): 
+        # accessing public data member 
+        print("Age: ", self.age)
+# creating object 
+obj = pub_mod("Jason", 35);
+# accessing public data member 
+print("Name: ", obj.name)  
+# calling public member function of the class 
+obj.Age()
+
+
+? Output
+5
+3
+Traceback (most recent call last) :
+  File "main.py", line 14, in <module>
+     print(rect.length)
+AttributeError: 'Rectangle' object has no attribute 'length'
+
+
+
+# illustrating protected members & protected access modifier 
+class details:
+    _name="Jason"
+    _age=35
+    _job="Developer"
+class pro_mod(details):
+    def __init__(self):
+        print(self._name)
+        print(self._age)
+        print(self._job)
+ 
+# creating object of the class 
+obj = pro_mod()
+
+
+We can access private members from outside of a class using the following two approaches
+
+Public method to access private members
+Name Mangling to access private members
+
+
+#Name Mangling in Python:
+
+Purpose: Name mangling is used to make class attributes (variables or methods) more "private."
+
+How it works: When you define a variable or method with __ (double underscore) at the beginning, Python internally changes its name by adding the class name prefix (e.g., _ClassName__attribute).
+
+class MyClass:
+    def __init__(self):
+        self.__private_var = 42
+        
+    def __private_method(self):
+        print("This is a private method.")
+
+# Trying to access the private member directly will raise an error
+obj = MyClass()
+print(obj.__private_var)  # This will raise an AttributeError
+
+
+print(obj._MyClass__private_var)  # This will work, outputs: 42
+obj._MyClass__private_method()    # This will work, outputs: "This is a private method."
+
+What is the biggest reason for the use of polymorphism?
+==> The program will have a more elegant design and will be easier to maintain and update.
+
+
+Polymorphism,a fundamental concept in object-oriented programming, is the ability of one function to perform multiple functionalities.
+
+#Polymorphism in Python Example
+print(10+256)
+print("Scaler"+"Academy")
+
+Operator overloading is the concept of using an operator beyond its pre-defined purpose.
+
+? Function of Polymorphism in Python
+
+print(len("Scaler Academy"))
+print(len(["Python", "PHP", "C++"]))
+print(len({"Name": "Rahul", "Address": "Kolkata,India"}))
+
+we can clearly understand the len() function worked for all three data types- strings, lists and dictionaries.
+
+? Class Polymorphism in Python
+
+class Cat:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+ 
+    def info(self):
+        print(f"I am a cat. My name is {self.name}. I am {self.age} years old.")
+ 
+    def make_sound(self):
+        print("Meow")
+ 
+ 
+class Cow:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+ 
+    def info(self):
+        print(f"I am a Cow. My name is {self.name}. I am {self.age} years old.")
+ 
+    def make_sound(self):
+        print("Moo")
+cat1 = Cat("Kitty", 2.5)
+cow1 = Cow("Fluffy", 4)
+ 
+for animal in (cat1, cow1):
+    animal.make_sound()
+    animal.info()
+    animal.make_sound()
+
+? Polymorphism in Python with Inheritance
+
+Polymorphism in Python lets us define the child class to have the same name methods as the parent class. On the other hand, inheritance in Python, the child class inherits all methods of the parent class.
+
+from math import pi
+class Shape:
+    def __init__(self, name):
+        self.name = name
+    def area(self):
+        pass
+    def fact(self):
+        return "I am a two-dimensional shape."
+    def __str__(self):
+        return self.name
+class Circle(Shape):
+    def __init__(self, radius):
+        super().__init__("Circle")
+        self.radius = radius
+    def area(self):
+        return pi*self.radius**2
+shape_circle = Circle(7)
+print(shape_circle)
+print(shape_circle.area())
+print(shape_circle.fact())
+
+
+? Polymorphism with Class Methods
+
+class Cat:
+    def mood(self): 
+       print("Grumpy") 
+    def sound(self): 
+       print("Meow") 
+ 
+class Dog:
+    def mood(self): 
+       print("Happy") 
+    def sound(self): 
+       print("Woof") 
+ 
+hello_kitty = Cat()
+hello_puppy = Dog()
+ 
+for pet in (hello_kitty, hello_puppy):
+    pet.mood()
+    pet.sound()
+
+? Polymorphism with Function and Objects
+
+class Beans(): 
+     def type(self): 
+       print("Vegetable") 
+     def color(self):
+       print("Green") 
+class Mango(): 
+     def type(self): 
+       print("Fruit") 
+     def color(self): 
+       print("Yellow")      
+def func(obj): 
+       obj.type() 
+       obj.color()
+#creating objects
+obj_beans = Beans() 
+obj_mango = Mango() 
+func(obj_beans) 
+func(obj_mango)
+
+
+## Very very important concept
+
+class Parent:
+    def __init__(self):
+        self.add(400)
+        print(self.i)
+
+    def add(self, i):
+        self.i = i+90
+
+
+class Child(Parent):
+    def __init__(self):
+        super().__init__()
+
+    def add(self, i):
+        self.i = i+80
+        super().add(i)
+
+
+obj = Child()
+
+Let's break down the code step by step to determine the output:
+
+### 1. **Creating the Child object (obj = Child())**
+
+- The Child class inherits from Parent. When obj = Child() is executed, the __init__ method of the Child class is called.
+- Inside the Child class' __init__, the super().__init__() method is called, which invokes the __init__ method of the Parent class.
+
+### 2. **Inside the Parent class __init__ method**
+- The add(400) method is called from Parent's __init__.
+    - Since add() is overridden in the Child class, the Child's version of add() will be called.
+    - In Child.add(self, i), the value of i is 400, so self.i = 400 + 80, which sets self.i = 480.
+    - Then, super().add(i) is called from the Child class, which invokes Parent.add(self, i) with i = 400.
+    - In Parent.add(self, i), the value of i is 400, so self.i = 400 + 90, which sets self.i = 490.
+
+### 3. **Final value of self.i**
+- The final value of self.i is 490 after the Parent's add() method completes.
+
+### 4. **Print statement**
+- After the add(400) method call, the print statement in Parent.__init__ prints self.i, which is 490.
+
+### **Output**:
+
+490
+
+
+
+# Data Abstraction
+
+The process by which data and functions are defined in such a way that only essential details can be seen and unnecessary implementations are hidden is called Data Abstraction.
+
+The class whose properties and methods are inherited is known as the Parent class. And the class that inherits the properties from the parent class is the Child class/subclass.
+
+The basic syntax to implement inheritance in Python is:
+
+class parent_class:
+body of parent class
+
+class child_class( parent_class):
+body of child class
+
+? Abstract Classes in Python
+
+ The classes that cannot be instantiated. This means that we cannot create objects of an abstract class and these are only meant to be inherited. 
+
+ Defining an Abstract Base Class lets us create a common Application Programming Interface (API) for multiple subclasses.
+
+ # Working of Abstract Class
+
+ Unlike other high-level programming languages, Python does not provide the abstract class itself. To achieve that, we use the abc module of Python, which provides the base and necessary tools for defining Abstract Base Classes (ABC). ABCs give the feature of virtual subclasses, which are classes that don’t inherit from a class and can still be recognized by
+
+isinstance()
+
+and
+
+issubclass()
+
+The abc module also provides the @abstractmethod decorator for indicating abstract methods.
+
+ABC is defined in a way that the abstract methods in the base class are created by decorating with the @abstractmethod keyword and the concrete methods are registered as implementations of the base class.
+
+The methods where the implementation may vary for any other subclass are defined as abstract methods and need to be given an implementation in the subclass definition.
+
+There are methods that have the same implementation for all subclasses that we call concrete method
+
+from abc import ABC, abstractmethod
+
+class Parent(ABC):
+  #common function
+  def common_fn(self):
+    print('In the common method of Parent')
+ @abstractmethod
+  def abs_fn(self): #is supposed to have different implementation in child classes 
+    pass
+
+class Child1(Parent):
+  def abs_fn(self):
+    print('In the abstract method of Child1')
+
+class Child2(Parent):
+  def abs_fn(self):
+    print('In the abstract method of Child2')
+
+An abstract class can have both abstract methods and concrete methods.
+
+ Interesting points to keep in mind are:
+
+We always need to provide an implementation of the abstract method in the child class even when implementation is given in the abstract class.
+A subclass must implement all abstract methods that are defined in the parent class otherwise it results in an error.
+
+from abc import ABC,abstractmethod
+ 
+class Animal(ABC):
+ 
+    #concrete method
+    def sleep(self):
+        print("I am going to sleep in a while")
+ 
+    @abstractmethod
+    def sound(self):
+	  print("This function is for defining the sound by any animal")
+        pass
+ 
+class Snake(Animal):
+    def sound(self):
+        print("I can hiss")
+ 
+class Dog(Animal):
+    def sound(self):
+        print("I can bark")
+ 
+class Lion(Animal):
+    def sound(self):
+        print("I can roar")
+       
+class Cat(Animal):
+    def sound(self):
+        print("I can meow")
+
+c = Cat()
+c.sleep()
+c.sound()
+ 
+c = Snake()
+c.sound()
+
+# Iterators
+
+iterators in Python are also objects. They are used for iterating over iterable objects. This means that we can use iterators on lists, tuples, dictionaries, and strings.
+
+Iterators are implemented using two unique Python methods iter() and next(). They are collectively called iterator protocols.
+
+Iterators are implemented using two unique Python methods iter() and next(). They are collectively called iterator protocols.
+
+mySecret = ["I", "Love", "Python"]
+ 
+myIter = iter(mySecret)
+print(myIter)
+ 
+print(next(myIter))
+print(next(myIter))
+print(next(myIter))
+
+
+<list_iterator object at 0x00000148B32CE4C0>
+I
+Love
+Python
+
+# Iterator vs Iterable
+
+An iterator is an object that consists of __iter__() and __next__() (collectively these are known as iterator protocol).
+
+An iterable is anything we can loop over using a loop.
+
+# Create an Iterator
+
+Dunder/Magic methods are methods that have two underscores before and after their name; their invocation generally happens internally from a class or some action.
+
+The two dunder methods we have to use are:
+
+__iter__()
+__next__() These are similar to iter() and next().
+__iter__() should return the iterator object. If required, some initialization can be performed.
+
+__next__() should return the next item in the sequence. Upon reaching the end, it should raise StopIteration.
+
+class ModOfTwo:
+    def __init__(self, max=0):
+        self.max = max
+ 
+    def __iter__(self):
+        self.n = 0
+        return self
+ 
+    def __next__(self):
+        if self.n <= self.max:
+            result = self.n % 2
+            self.n += 1
+            return result
+        else:
+            raise StopIteration
+ 
+ 
+# Creating an object
+numbers = ModOfTwo(3)
+ 
+# Creating an iterator object
+i = iter(numbers)
+ 
+print(next(i))
+print(next(i))
+print(next(i))
+print(next(i))
+
+
+0 #0%2
+1 #1%2
+0 #2%2
+1 #3%2
+
+? Python Infinite Iterators
+iterators can also be infinite or never-ending.
+
+class InfiniteIterator:
+ 
+    def __iter__(self):
+        self.n = 0
+        return self
+ 
+    def __next__(self):
+        result = self.n * 2
+        self.n += 1
+        return result
+ 
+multiplesOfTwo = InfiniteIterator()
+ 
+i = iter(multiplesOfTwo)
+ 
+print("Multiples of two are:")
+print(next(i))
+print(next(i))
+print(next(i))
+print(next(i))
+print(next(i))
+
+- Output
+
+Multiples of two are:
+0
+2
+4
+6
+8
+.
+.
+.
+infinite
+
+
+Iterators are very helpful, and they help us save a lot of resources. As we can see in finding the multiples of two, we are not storing any array of numbers.
+
+Here are a few key points that you should remember
+
+Iterators are Python objects which are used to iterate over iterable objects.
+iter() and next() can be used to iterate over iterable objects
+__iter__() and __next__() are used to create custom iterators
+for loop in Python, use iterators behind the scene
+Infinite iterators are capable of returning infinite values.
+
+- The syntax of for loop is:
+
+nums = [1, 2, 3, 4, 5]
+for i in nums:
+    print(i)
+
+- This is what happens behind the scenes :
+
+nums = [1, 2, 3, 4]
+nums_iter_obj = iter(nums)
+ 
+while True:
+    try:
+        print(next(nums_iter_obj))
+    except StopIteration:
+        break
+
+
+
+
+
